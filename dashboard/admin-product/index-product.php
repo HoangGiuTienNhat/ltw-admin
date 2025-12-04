@@ -1276,9 +1276,9 @@
                         <span class="nav-link-title"> Product </span>
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="./index-manage.html"> Product Management  </a>
-                        <a class="dropdown-item" href="./index-orders.html"> Orders </a>
-                        <a class="dropdown-item" href="./index-product.html"> Add New Product </a>
+                        <a class="dropdown-item" href="./index-manage.php"> Product Management  </a>
+                        <a class="dropdown-item" href="./index-orders.php"> Orders </a>
+                        <a class="dropdown-item" href="./index-product.php"> Add New Product </a>
                       </div>
                     </li>
                     <!-- vung thay doi /001 -->
@@ -1422,14 +1422,11 @@
                         <label class="form-label">Name</label>
                         <input class="form-control" id="name" name="name" required>
                       </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category (name)</label>
-                        <input class="form-control" id="category" name="category">
-                      </div>
 
                       <div class="mb-3">
                         <label class="form-label"> Category </label>
-                          <select class="form-select">
+                          <select class="form-select" id="category" name="category">
+                            <option></option>
                             <option>Laptop</option>
                             <option>Điện thoại</option>
                             <option>Tai nghe</option>
@@ -1520,7 +1517,7 @@
                   </div>
                   <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="./index-manage.html" class="btn btn-link">Back</a>
+                    <a href="./index-manage.php" class="btn btn-link">Back</a>
                   </div>
                 </form>
               </div>
@@ -3103,7 +3100,9 @@
       });
     </script>
 
-    <script src="./js/admin.js"></script>
+    
+    <script src="./js/product.js"></script>
     <!-- END PAGE SCRIPTS -->
+
   </body>
 </html>

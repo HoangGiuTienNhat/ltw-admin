@@ -1409,127 +1409,37 @@
 
         <!-- vung thuc hien -->
 
+
+
+
+
+
+
+
+        
         <div class="page-body">
           <div class="container-xl py-4">
             <div class="card">
               <div class="card-body">
-                <h3 id="formTitle">Product</h3>
-                <form id="productForm" enctype="multipart/form-data">
-                  <input type="hidden" name="id" id="pid">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input class="form-control" id="name" name="name" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category (name)</label>
-                        <input class="form-control" id="category" name="category">
-                      </div>
-
-                      <div class="mb-3">
-                        <label class="form-label"> Category </label>
-                          <select class="form-select">
-                            <option>Laptop</option>
-                            <option>Điện thoại</option>
-                            <option>Tai nghe</option>
-                            <option>Đồng hồ</option>
-                            <option>Tablet</option>
-                            <option>Camera</option>
-                          </select>
-                      </div>
-                      
-                      <div class="row">
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Price</label>
-                          <input type="number" step="0.01" class="form-control" id="price" name="price" required>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Old Price</label>
-                          <input type="number" step="0.01" class="form-control" id="old_price" name="old_price">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Amount</label>
-                          <input type="number" class="form-control" id="amount" name="amount" value="100">
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Chip</label>
-                        <input class="form-control" id="chip" name="chip">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">RAM</label>
-                        <input class="form-control" id="ram" name="ram">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Screen</label>
-                        <input class="form-control" id="screen" name="screen">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Battery</label>
-                        <input class="form-control" id="battery" name="battery">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Guarantee</label>
-                        <input class="form-control" id="guarantee" name="guarantee" value="12 Tháng">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Outstanding (HTML allowed)</label>
-                        <textarea class="form-control" id="outstanding" name="outstanding" rows="3"></textarea>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Rating</label>
-                          <input type="number" step="0.1" max="5" min="0" class="form-control" id="rating" name="rating" value="5">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Is Featured</label>
-                          <select id="is_featured" name="is_featured" class="form-control">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label class="form-label">Primary Image</label>
-                        <input type="file" class="form-control" id="imageFile" accept="image/*">
-                        <input type="hidden" id="image" name="image">
-                        <div class="mt-2"><img id="imagePreview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 1</label>
-                        <input type="file" class="form-control" id="image1File" accept="image/*">
-                        <input type="hidden" id="image1" name="image1">
-                        <div class="mt-2"><img id="image1Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 2</label>
-                        <input type="file" class="form-control" id="image2File" accept="image/*">
-                        <input type="hidden" id="image2" name="image2">
-                        <div class="mt-2"><img id="image2Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 3</label>
-                        <input type="file" class="form-control" id="image3File" accept="image/*">
-                        <input type="hidden" id="image3" name="image3">
-                        <div class="mt-2"><img id="image3Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                    </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <input id="search" class="form-control" placeholder="Search products by name or category">
                   </div>
-                  <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="./index-manage.html" class="btn btn-link">Back</a>
+                  <div class="col-md-6 text-end">
+                    <a class="btn btn-primary" href="./index-product.html?action=new">Add Product</a>
                   </div>
-                </form>
+                </div>
+                <div id="tableContainer"></div>
               </div>
             </div>
           </div>
         </div>
-
         <!-- vung thuc hien/  -->
 
+
+
+
+        
         <!--  BEGIN FOOTER  -->
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
@@ -3103,7 +3013,110 @@
       });
     </script>
 
-    <script src="./js/admin.js"></script>
+    
     <!-- END PAGE SCRIPTS -->
+    
+    <script>
+    (function(){
+      // Config - Adjust relative paths if necessary
+      const apiBase = '../../../project-web/public/api/';
+      const apiProducts = apiBase + 'products.php';
+      const imageBase = '../../../project-web/public/';
+
+      function el(id){ return document.getElementById(id); } 
+
+      function escapeHtml(str){ 
+        if(!str) return ''; 
+        return String(str).replace(/[&<>\"']/g, function(s){
+          return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[s];
+        }); 
+      }
+
+      // --- Product List Logic ---
+      
+      // Initialize Search Listener
+      const qInput = el('search');
+      if (qInput){
+        qInput.addEventListener('keyup', (e)=>{ 
+          if (e.key === 'Enter') loadProducts(qInput.value); 
+        });
+        
+        // Initial load
+        loadProducts('');
+      }
+
+      function loadProducts(q){
+        const url = apiProducts + (q ? ('?q=' + encodeURIComponent(q)) : '');
+        fetch(url)
+          .then(r => r.json())
+          .then(data => {
+            renderProductsTable(data);
+          })
+          .catch(e => { 
+            console.error(e); 
+            const container = el('tableContainer');
+            if(container) container.innerText = 'Error loading products. Please check API path.'; 
+          });
+      }
+
+      function renderProductsTable(products){
+        const container = el('tableContainer');
+        if(!container) return;
+        
+        // Store for global access if needed
+        window.adminProducts = products || [];
+        
+        let html = `<div class="table-responsive"><table class="table card-table table-vcenter text-nowrap datatable">
+          <thead>
+            <tr>
+              <th class="w-1">ID</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>`;
+          
+        if(products && products.length > 0) {
+            products.forEach(p => {
+              // Image handling
+              const imgSrc = p.image ? (p.image.indexOf('http') === 0 ? p.image : imageBase + p.image) : null;
+              const img = imgSrc 
+                ? `<span class="avatar avatar-sm" style="background-image: url(${imgSrc})"></span>` 
+                : '<span class="avatar avatar-sm">-</span>';
+
+              html += `<tr>
+                <td><span class="text-secondary">${p.id}</span></td>
+                <td>${img}</td>
+                <td>${escapeHtml(p.name)}</td>
+                <td>${escapeHtml(p.category||'')}</td>
+                <td>${p.price}</td>
+                <td class="text-end">
+                  <a class="btn btn-sm btn-outline-secondary" href="./index-product.html?id=${p.id}">Open</a>
+                  <button class="btn btn-sm btn-danger ms-1" data-id="${p.id}" onclick="adminDelete(${p.id})">Delete</button>
+                </td>
+              </tr>`;
+            });
+        } else {
+            html += '<tr><td colspan="6" class="text-center p-4">No products found</td></tr>';
+        }
+        
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+        
+        // Expose delete function globally so onclick="" works
+        window.adminDelete = function(id){ 
+            if(confirm('Delete product '+id+'?')){ 
+                fetch(apiProducts + '?id=' + id, { method: 'DELETE' })
+                .then(r => r.json())
+                .then(() => loadProducts(el('search') ? el('search').value : '')); 
+            } 
+        };
+      }
+
+    })();
+    </script>
   </body>
 </html>

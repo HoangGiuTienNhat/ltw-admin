@@ -64,7 +64,7 @@
       const imgSrc = p.image ? (p.image.indexOf('http')===0 ? p.image : imageBase + p.image) : null;
       const img = imgSrc?'<img src="'+imgSrc+'" style="height:48px">':'-';
       html += `<tr><td>${p.id}</td><td>${img}</td><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.category||'')}</td><td>${p.price}</td><td>`+
-        `<button class="btn btn-sm btn-secondary" onclick="adminOpenEdit(${p.id})">Edit</button> `+
+       
         `<a class="btn btn-sm btn-outline-secondary" href="./index-product.html?id=${p.id}">Open</a> `+
         `<button class="btn btn-sm btn-danger" data-id="${p.id}" onclick="adminDelete(${p.id})">Delete</button>`+
         `</td></tr>`;
@@ -74,65 +74,7 @@
     window.adminDelete = function(id){ if(confirm('Delete product '+id+'?')){ fetch(apiProducts+'?id='+id, { method: 'DELETE' }).then(r=>r.json()).then(()=>loadProducts(el('search')?el('search').value:'')); } };
   }
 
-  // Open inline edit modal
-  window.adminOpenEdit = function(id){
-    const p = (window.adminProducts||[]).find(x=>x.id==id);
-    if(!p){ alert('Product not found'); return; }
-    // populate fields
-    el('edit_id').value = p.id||'';
-    el('edit_name').value = p.name||'';
-    el('edit_category').value = p.category||'';
-    el('edit_price').value = p.price||'';
-    el('edit_amount').value = p.amount||'';
-    el('edit_chip').value = p.chip||'';
-    el('edit_ram').value = p.ram||'';
-    el('edit_outstanding').value = p.outstanding||'';
-    el('edit_rating').value = p.rating||'';
-    el('edit_is_featured').value = p.is_featured?1:0;
-    const prev = el('edit_imagePreview');
-    const hid = el('edit_image');
-    if(hid) hid.value = p.image || '';
-    if(prev){
-      if(p.image){ prev.src = (p.image.indexOf('http')===0 ? p.image : imageBase + p.image); prev.style.display='block'; }
-      else prev.style.display='none';
-    }
-    // clear file input
-    const fileInp = el('edit_imageFile'); if(fileInp) fileInp.value = '';
-    // show modal (bootstrap)
-    const modalEl = document.getElementById('editProductModal');
-    if (modalEl){ var m = bootstrap.Modal.getOrCreateInstance(modalEl); m.show(); }
-  };
-
-  // Save edit from modal
-  const editSaveBtn = el('editSaveBtn');
-  if (editSaveBtn){
-    editSaveBtn.addEventListener('click', async function(){
-      const obj = {};
-      const form = document.getElementById('editProductForm');
-      const fd = new FormData(form);
-      for (let pair of fd.entries()){ obj[pair[0]] = pair[1]; }
-      // If a new file was selected, upload it first
-      const fileEl = el('edit_imageFile');
-      if (fileEl && fileEl.files && fileEl.files.length>0){
-        try{
-          const path = await uploadFileForProduct(fileEl.files[0], obj.id, 0, obj.category);
-          if (path){ obj.image = path; const hid = el('edit_image'); if(hid) hid.value = path; }
-        } catch(err){ console.error('Upload failed', err); alert('Image upload failed'); return; }
-      }
-      // convert numeric flags
-      if (obj.id) obj.id = parseInt(obj.id);
-      if (obj.price) obj.price = parseFloat(obj.price);
-      if (obj.amount) obj.amount = parseInt(obj.amount);
-      if (obj.rating) obj.rating = parseFloat(obj.rating);
-      obj.is_featured = parseInt(obj.is_featured||0);
-      fetch(apiProducts, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj) }).then(r=>r.json()).then(res=>{
-        // hide modal and reload list
-        const modalEl = document.getElementById('editProductModal'); if (modalEl){ var m = bootstrap.Modal.getInstance(modalEl); if(m) m.hide(); }
-        loadProducts(el('search')?el('search').value:'');
-      }).catch(err=>{ console.error(err); alert('Save failed'); });
-    });
-  }
-
+  
   // product form page
   if (el('productForm')){
     const params = new URLSearchParams(location.search);

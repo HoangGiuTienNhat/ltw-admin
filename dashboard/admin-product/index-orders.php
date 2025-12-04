@@ -1276,9 +1276,9 @@
                         <span class="nav-link-title"> Product </span>
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="./index-manage.html"> Product Management  </a>
-                        <a class="dropdown-item" href="./index-orders.html"> Orders </a>
-                        <a class="dropdown-item" href="./index-product.html"> Add New Product </a>
+                        <a class="dropdown-item" href="./index-manage.php"> Product Management  </a>
+                        <a class="dropdown-item" href="./index-orders.php"> Orders </a>
+                        <a class="dropdown-item" href="./index-product.php"> Add New Product </a>
                       </div>
                     </li>
                     <!-- vung thay doi /001 -->
@@ -1413,122 +1413,21 @@
           <div class="container-xl py-4">
             <div class="card">
               <div class="card-body">
-                <h3 id="formTitle">Product</h3>
-                <form id="productForm" enctype="multipart/form-data">
-                  <input type="hidden" name="id" id="pid">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input class="form-control" id="name" name="name" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Category (name)</label>
-                        <input class="form-control" id="category" name="category">
-                      </div>
-
-                      <div class="mb-3">
-                        <label class="form-label"> Category </label>
-                          <select class="form-select">
-                            <option>Laptop</option>
-                            <option>Điện thoại</option>
-                            <option>Tai nghe</option>
-                            <option>Đồng hồ</option>
-                            <option>Tablet</option>
-                            <option>Camera</option>
-                          </select>
-                      </div>
-                      
-                      <div class="row">
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Price</label>
-                          <input type="number" step="0.01" class="form-control" id="price" name="price" required>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Old Price</label>
-                          <input type="number" step="0.01" class="form-control" id="old_price" name="old_price">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Amount</label>
-                          <input type="number" class="form-control" id="amount" name="amount" value="100">
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Chip</label>
-                        <input class="form-control" id="chip" name="chip">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">RAM</label>
-                        <input class="form-control" id="ram" name="ram">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Screen</label>
-                        <input class="form-control" id="screen" name="screen">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Battery</label>
-                        <input class="form-control" id="battery" name="battery">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Guarantee</label>
-                        <input class="form-control" id="guarantee" name="guarantee" value="12 Tháng">
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Outstanding (HTML allowed)</label>
-                        <textarea class="form-control" id="outstanding" name="outstanding" rows="3"></textarea>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Rating</label>
-                          <input type="number" step="0.1" max="5" min="0" class="form-control" id="rating" name="rating" value="5">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label class="form-label">Is Featured</label>
-                          <select id="is_featured" name="is_featured" class="form-control">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-3">
-                        <label class="form-label">Primary Image</label>
-                        <input type="file" class="form-control" id="imageFile" accept="image/*">
-                        <input type="hidden" id="image" name="image">
-                        <div class="mt-2"><img id="imagePreview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 1</label>
-                        <input type="file" class="form-control" id="image1File" accept="image/*">
-                        <input type="hidden" id="image1" name="image1">
-                        <div class="mt-2"><img id="image1Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 2</label>
-                        <input type="file" class="form-control" id="image2File" accept="image/*">
-                        <input type="hidden" id="image2" name="image2">
-                        <div class="mt-2"><img id="image2Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Image 3</label>
-                        <input type="file" class="form-control" id="image3File" accept="image/*">
-                        <input type="hidden" id="image3" name="image3">
-                        <div class="mt-2"><img id="image3Preview" src="" style="max-height:120px; display:none"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="./index-manage.html" class="btn btn-link">Back</a>
-                  </div>
-                </form>
+                <h3>Orders</h3>
+                <div id="ordersContainer">
+                    <div class="text-center p-3 text-secondary">Loading orders...</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- vung thuc hien/  -->
+
+
+
+
+        
 
         <!--  BEGIN FOOTER  -->
         <footer class="footer footer-transparent d-print-none">
@@ -3103,7 +3002,8 @@
       });
     </script>
 
-    <script src="./js/admin.js"></script>
+    
     <!-- END PAGE SCRIPTS -->
+    <script src="./js/orders.js"></script>
   </body>
 </html>
