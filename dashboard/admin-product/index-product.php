@@ -1278,6 +1278,7 @@
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="./index-manage.php"> Product Management  </a>
                         <a class="dropdown-item" href="./index-orders.php"> Orders </a>
+                        <a class="dropdown-item" href="./index-cart.php"> Cart </a>
                         <a class="dropdown-item" href="./index-product.php"> Add New Product </a>
                       </div>
                     </li>

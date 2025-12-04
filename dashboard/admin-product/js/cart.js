@@ -24,7 +24,7 @@
     carts.forEach(c=>{
       const itemsCount = (c.items||[]).length;
       const user = c.user_name || (c.user_id?c.user_id:'-');
-      html += `<tr><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${escapeHtml(c.status)}</td><td>${c.created_at}</td><td class="text-end">`+
+      html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${escapeHtml(c.status)}</td><td>${c.created_at}</td><td class="text-end">`+
         `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
         `<select id="status-select-${c.id}" class="form-select form-select-sm d-inline-block mx-1" style="width:120px"><option value="pending">pending</option><option value="processing">processing</option><option value="shipping">shipping</option><option value="completed">completed</option><option value="cancelled">cancelled</option></select>`+
         `<button class="btn btn-sm btn-primary" onclick="updateCartStatus(${c.id})">Set</button> `+
@@ -41,18 +41,28 @@
     try{
       const res = await fetch(apiCarts + '?id=' + encodeURIComponent(id));
       const cart = await res.json();
-      const container = el('cartDetailContent');
-      if (!container) return;
+      // remove any existing detail rows
+      document.querySelectorAll('tr.detail-row').forEach(r=>r.remove());
+      // find the row for this cart
+      const row = document.querySelector('tr[data-cart-id="'+id+'"]');
+      if (!row) return alert('Row not found');
+      // build detail HTML
       let html = `<div class="mb-2"><strong>Cart #${cart.id}</strong> — Status: <span class="badge bg-info">${escapeHtml(cart.status)}</span></div>`;
       html += `<div class="mb-2">User: ${escapeHtml($replace(cart.user_name || cart.user_id || 'Guest'))}</div>`;
       html += `<div class="mb-2">Session: ${escapeHtml(cart.session_id||'')}</div>`;
       html += '<div class="table-responsive"><table class="table table-sm"><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th></tr></thead><tbody>';
       let total = 0;
-      (cart.items||[]).forEach(it=>{ const sub = (parseFloat(it.price)||0) * (parseInt(it.quantity)||0); total += sub; html += `<tr><td>${escapeHtml(it.product_name||'')}</td><td>${it.price}</td><td>${it.quantity}</td><td>${sub.toFixed(2)}</td></tr>`; });
+      (cart.items||[]).forEach(it=>{ const sub = (parseFloat(it.price)||0) * (parseInt(it.quantity)||0); total += sub; html += `<tr><td>${escapeHtml(it.product_name||'')}</td><td>${(parseFloat(it.price)||0).toFixed(2)}</td><td>${it.quantity}</td><td>${sub.toFixed(2)}</td></tr>`; });
       html += `<tr><td colspan="3" class="text-end"><strong>Total</strong></td><td><strong>${total.toFixed(2)}</strong></td></tr>`;
       html += '</tbody></table></div>';
-      container.innerHTML = html;
-      const detailBox = el('cartDetailContainer'); if(detailBox) detailBox.style.display='block';
+      // create detail row
+      const detailTr = document.createElement('tr');
+      detailTr.className = 'detail-row';
+      const td = document.createElement('td');
+      td.colSpan = 8;
+      td.innerHTML = html + '<div class="text-end mt-2"><button class="btn btn-sm btn-outline-secondary" onclick="document.querySelectorAll(\'tr.detail-row\').forEach(r=>r.remove())">Close</button></div>';
+      detailTr.appendChild(td);
+      row.parentNode.insertBefore(detailTr, row.nextSibling);
     } catch(err){ console.error(err); alert('Failed to load cart'); }
   };
 

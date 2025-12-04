@@ -837,6 +837,15 @@
                 <a href="../sign-in.html" class="dropdown-item">Logout</a>
               </div>
             </div>
+            <!-- Inline order detail container (shows when View clicked) -->
+            <div id="cartDetailContainer" style="display:none;" class="mt-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="closeOrderDetail()">Close</button></div>
+                  <div id="cartDetailContent"><!-- Filled dynamically by orders.js --></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -1278,6 +1287,7 @@
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="./index-manage.php"> Product Management  </a>
                         <a class="dropdown-item" href="./index-orders.php"> Orders </a>
+                        <a class="dropdown-item" href="./index-cart.php"> Cart </a>
                         <a class="dropdown-item" href="./index-product.php"> Add New Product </a>
                       </div>
                     </li>
@@ -1593,6 +1603,23 @@
       </div>
     </div>
     <!-- END PAGE MODALS -->
+    <!-- Order Detail Modal (used by admin View action) -->
+    <div class="modal modal-blur fade" id="cartDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cart Detail</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="cartDetailModalBody">
+            <!-- Filled dynamically -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-link link-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="settings">
       <a
         href="#"
