@@ -1276,9 +1276,9 @@
                         <span class="nav-link-title"> Product </span>
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="./index-manage.html"> Product Management  </a>
-                        <a class="dropdown-item" href="./index-orders.html"> Orders </a>
-                        <a class="dropdown-item" href="./index-product.html"> Add New Product </a>
+                        <a class="dropdown-item" href="./index-manage.php"> Product Management  </a>
+                        <a class="dropdown-item" href="./index-orders.php"> Orders </a>
+                        <a class="dropdown-item" href="./index-product.php"> Add New Product </a>
                       </div>
                     </li>
                     <!-- vung thay doi /001 -->
@@ -1408,13 +1408,30 @@
 
 
         <!-- vung thuc hien -->
-
         <div class="page-body">
           <div class="container-xl py-4">
             <div class="card">
               <div class="card-body">
-                <h3>Orders</h3>
-                <div id="ordersContainer"></div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <input id="cartSearch" class="form-control" placeholder="Search carts by user or session id">
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <button class="btn btn-secondary" id="btnRefreshCarts">Refresh</button>
+                  </div>
+                </div>
+                <div id="cartsContainer"></div>
+
+                <!-- Cart detail (hidden) -->
+                <div id="cartDetailContainer" style="display:none; margin-top:20px; padding:15px; background:#f8f9fa; border-radius:8px; border-left:4px solid #0d6efd;">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Cart Detail</h5>
+                    <div>
+                      <button class="btn btn-sm btn-secondary me-2" onclick="closeCartDetail()">Close</button>
+                    </div>
+                  </div>
+                  <div id="cartDetailContent"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1426,7 +1443,6 @@
 
 
         
-
         <!--  BEGIN FOOTER  -->
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
@@ -1591,6 +1607,23 @@
       </div>
     </div>
     <!-- END PAGE MODALS -->
+    <!-- Cart Detail Modal -->
+    <div class="modal modal-blur fade" id="cartDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cart Detail</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="cartDetailModalBody">
+            <!-- populated by JS -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="settings">
       <a
         href="#"
@@ -3000,7 +3033,9 @@
       });
     </script>
 
-    <script src="./js/admin.js"></script>
+    
     <!-- END PAGE SCRIPTS -->
+    
+    <script src="./js/cart.js"></script>
   </body>
 </html>
