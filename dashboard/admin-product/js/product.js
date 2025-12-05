@@ -61,7 +61,7 @@
         
         el('price').value = p.price || '';
         el('old_price').value = p.old_price || '';
-        el('amount').value = p.amount || 100;
+        el('amount').value = p.amount || 0;
         el('chip').value = p.chip || '';
         el('ram').value = p.ram || '';
         el('screen').value = p.screen || '';
