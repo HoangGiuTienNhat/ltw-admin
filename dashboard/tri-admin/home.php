@@ -113,32 +113,27 @@ try {
         $contactChartValues[] = $contactCount;
     }
 
-    // User registration sources (for donut chart)
+    // User roles distribution (for donut chart)
     $stmt = $pdo->query("
         SELECT
-            CASE
-                WHEN referrer LIKE '%google%' THEN 'Search Engine'
-                WHEN referrer LIKE '%facebook%' OR referrer LIKE '%twitter%' OR referrer LIKE '%instagram%' THEN 'Social Media'
-                WHEN referrer IS NULL OR referrer = '' THEN 'Direct'
-                ELSE 'Other'
-            END as source,
+            role,
             COUNT(*) as count
         FROM users
-        GROUP BY source
+        GROUP BY role
     ");
-    $userSources = $stmt->fetchAll();
+    $userRoles = $stmt->fetchAll();
 
     $sourceLabels = [];
     $sourceData = [];
-    foreach ($userSources as $source) {
-        $sourceLabels[] = $source['source'];
-        $sourceData[] = (int)$source['count'];
+    foreach ($userRoles as $role) {
+        $sourceLabels[] = ucfirst($role['role']);
+        $sourceData[] = (int)$role['count'];
     }
 
     // If no data, provide defaults
     if (empty($sourceLabels)) {
-        $sourceLabels = ['Direct', 'Social Media', 'Search Engine', 'Other'];
-        $sourceData = [1, 0, 0, 0];
+        $sourceLabels = ['Admin', 'Member'];
+        $sourceData = [1, 0];
     }
 
 } catch (Exception $e) {
