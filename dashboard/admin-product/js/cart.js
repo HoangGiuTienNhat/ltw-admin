@@ -8,34 +8,67 @@
 
   async function loadCarts(q){
     try{
-      let url = apiCarts;
-      if (q) url += '?q=' + encodeURIComponent(q);
-      const res = await fetch(url);
-      const data = await res.json();
-      const cartsList = data && data.data ? data.data : data;
-      renderCartsTable(cartsList);
+      // Load pending and processing carts separately so admin can see both
+      const qs = q ? '&q=' + encodeURIComponent(q) : '';
+      const [resPending, resProcessing] = await Promise.all([
+        fetch(apiCarts + '?status=pending' + (q? '&q='+encodeURIComponent(q): '')),
+        fetch(apiCarts + '?status=processing' + (q? '&q='+encodeURIComponent(q): ''))
+      ]);
+      const jPending = await resPending.json();
+      const jProcessing = await resProcessing.json();
+      const pending = jPending && jPending.data ? jPending.data : (Array.isArray(jPending)? jPending : []);
+      const processing = jProcessing && jProcessing.data ? jProcessing.data : (Array.isArray(jProcessing)? jProcessing : []);
+      renderCartsSections(pending, processing);
     } catch(err){ console.error(err); const c = el('cartsContainer'); if(c) c.innerText='Error loading carts'; }
   }
 
-  function renderCartsTable(carts){
+  function renderCartsSections(pending, processing){
     const container = el('cartsContainer'); if(!container) return;
-    if(!carts || carts.length===0){ container.innerHTML = '<div class="p-4">No carts found.</div>'; return; }
-    let html = '<div class="table-responsive"><table class="table card-table table-vcenter text-nowrap"><thead><tr><th>ID</th><th>User</th><th>Session</th><th>Items</th><th>Total</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody>';
-    carts.forEach(c=>{
-      const itemsCount = (c.items||[]).length;
-      const user = c.user_name || (c.user_id?c.user_id:'-');
-      html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${escapeHtml(c.status)}</td><td>${c.created_at}</td><td class="text-end">`+
-        `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
-        `<select id="status-select-${c.id}" class="form-select form-select-sm d-inline-block mx-1" style="width:120px"><option value="pending">pending</option><option value="processing">processing</option><option value="shipping">shipping</option><option value="completed">completed</option><option value="cancelled">cancelled</option></select>`+
-        `<button class="btn btn-sm btn-primary" onclick="updateCartStatus(${c.id})">Set</button> `+
-        `<button class="btn btn-sm btn-danger ms-1" onclick="deleteCart(${c.id})">Delete</button>`+
-        `</td></tr>`;
-    });
-    html += '</tbody></table></div>';
+    let html = '';
+    // Pending section
+    html += '<h5>Pending Carts</h5>';
+    if(!pending || pending.length===0){ html += '<div class="p-2 mb-3">No pending carts.</div>'; }
+    else {
+      html += '<div class="table-responsive mb-4"><table class="table card-table table-vcenter text-nowrap"><thead><tr><th>ID</th><th>User</th><th>Session</th><th>Items</th><th>Total</th><th>Created</th><th>Action</th></tr></thead><tbody>';
+      pending.forEach(c=>{ const itemsCount = (c.items||[]).length; const user = c.user_name || (c.user_id?c.user_id:'-');
+        html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${c.created_at}</td><td class="text-end">`+
+          `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
+          `<button class="btn btn-sm btn-primary ms-1" onclick="updateCartStatus(${c.id})">Set Status</button> `+
+          `<button class="btn btn-sm btn-danger ms-1" onclick="deleteCart(${c.id})">Delete</button>`+
+          `</td></tr>`; });
+      html += '</tbody></table></div>';
+    }
+
+    // Processing section
+    html += '<h5>Processing (Awaiting Payment)</h5>';
+    if(!processing || processing.length===0){ html += '<div class="p-2 mb-3">No processing carts.</div>'; }
+    else {
+      html += '<div class="table-responsive"><table class="table card-table table-vcenter text-nowrap"><thead><tr><th>ID</th><th>User</th><th>Session</th><th>Items</th><th>Total</th><th>Updated</th><th>Action</th></tr></thead><tbody>';
+      processing.forEach(c=>{ const itemsCount = (c.items||[]).length; const user = c.user_name || (c.user_id?c.user_id:'-');
+        html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${c.updated_at||c.created_at}</td><td class="text-end">`+
+          `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
+          `<button class="btn btn-sm btn-success ms-1" onclick="completeProcessingCart(${c.id})">Complete Payment</button> `+
+          `<button class="btn btn-sm btn-warning ms-1" onclick="cancelProcessingCart(${c.id})">Cancel</button>`+
+          `</td></tr>`; });
+      html += '</tbody></table></div>';
+    }
+
     container.innerHTML = html;
-    // set current status on selects
-    carts.forEach(c=>{ const s = document.getElementById('status-select-'+c.id); if(s) s.value = c.status; });
   }
+
+  // admin action: complete processing cart -> create order and mark cart completed
+  window.completeProcessingCart = async function(id){
+    if(!confirm('Complete payment for cart '+id+'? This will create an order.')) return;
+    try{
+      const res = await fetch(apiCarts, { method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:id, status:'completed'}) });
+      const jr = await res.json();
+      if (jr && jr.success) { alert('Cart completed. Order: '+(jr.order_number||'')); loadCarts(el('cartSearch')?el('cartSearch').value:''); }
+      else if (jr && jr.order_number) { alert('Cart completed. Order: '+jr.order_number); loadCarts(el('cartSearch')?el('cartSearch').value:''); }
+      else alert('Complete failed');
+    } catch(err){ console.error(err); alert('Complete failed'); }
+  };
+
+  window.cancelProcessingCart = async function(id){ if(!confirm('Cancel cart '+id+'?')) return; try{ const res = await fetch(apiCarts, { method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:id, status:'cancelled'}) }); const jr = await res.json(); if (jr && jr.success){ alert('Cancelled'); loadCarts(el('cartSearch')?el('cartSearch').value:''); } else alert('Cancel failed'); } catch(err){ console.error(err); alert('Cancel failed'); } };
 
   window.viewCart = async function(id){
     try{
