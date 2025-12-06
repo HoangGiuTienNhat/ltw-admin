@@ -1047,210 +1047,6 @@
                         </a>
                       </div>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#navbar-extra"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"
-                        role="button"
-                        aria-expanded="false"
-                      >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"
-                          ><!-- Download SVG icon from http://tabler.io/icons/icon/star -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-1"
-                          >
-                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg
-                        ></span>
-                        <span class="nav-link-title"> Extra </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="../activity.html"> Activity </a>
-                            <a class="dropdown-item" href="../chat.html"> Chat </a>
-                            <a class="dropdown-item" href="../cookie-banner.html"> Cookie banner </a>
-                            <a class="dropdown-item" href="../empty.html"> Empty page </a>
-                            <a class="dropdown-item" href="../faq.html"> FAQ </a>
-                            <a class="dropdown-item" href="../gallery.html"> Gallery </a>
-                            <a class="dropdown-item" href="../invoice.html"> Invoice </a>
-                            <a class="dropdown-item" href="../job-listing.html"> Job listing </a>
-                            <a class="dropdown-item" href="../license.html"> License </a>
-                            <a class="dropdown-item" href="../logs.html"> Logs </a>
-                            <a class="dropdown-item" href="../marketing/index.html"> Marketing </a>
-                            <a class="dropdown-item" href="../music.html"> Music </a>
-                            <a class="dropdown-item" href="../page-loader.html"> Page loader </a>
-                          </div>
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="../photogrid.html"> Photogrid </a>
-                            <a class="dropdown-item" href="../pricing.html"> Pricing cards </a>
-                            <a class="dropdown-item" href="../pricing-table.html"> Pricing table </a>
-                            <a class="dropdown-item" href="../search-results.html"> Search results </a>
-                            <a class="dropdown-item" href="../settings.html"> Settings </a>
-                            <a class="dropdown-item" href="../signatures.html">
-                              Signatures
-                              <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                            </a>
-                            <a class="dropdown-item" href="../tasks.html"> Tasks </a>
-                            <a class="dropdown-item" href="../text-features.html">
-                              Text features
-                              <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-                            </a>
-                            <a class="dropdown-item" href="../trial-ended.html"> Trial ended </a>
-                            <a class="dropdown-item" href="../uptime.html"> Uptime monitor </a>
-                            <a class="dropdown-item" href="../users.html"> Users </a>
-                            <a class="dropdown-item" href="../widgets.html"> Widgets </a>
-                            <a class="dropdown-item" href="../wizard.html"> Wizard </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#navbar-layout"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"
-                        role="button"
-                        aria-expanded="false"
-                      >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"
-                          ><!-- Download SVG icon from http://tabler.io/icons/icon/layout-2 -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-1"
-                          >
-                            <path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                            <path d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                            <path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                            <path d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /></svg
-                        ></span>
-                        <span class="nav-link-title"> Layout </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="../layout-boxed.html"> Boxed </a>
-                            <a class="dropdown-item" href="../layout-combo.html"> Combined </a>
-                            <a class="dropdown-item" href="../layout-condensed.html"> Condensed </a>
-                            <a class="dropdown-item" href="../layout-fluid.html"> Fluid </a>
-                            <a class="dropdown-item" href="../layout-fluid-vertical.html"> Fluid vertical </a>
-                            <a class="dropdown-item" href="../layout-horizontal.html"> Horizontal </a>
-                            <a class="dropdown-item" href="../layout-navbar-dark.html"> Navbar dark </a>
-                          </div>
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="../layout-navbar-overlap.html"> Navbar overlap </a>
-                            <a class="dropdown-item" href="../layout-navbar-sticky.html"> Navbar sticky </a>
-                            <a class="dropdown-item" href="../layout-vertical-right.html"> Right vertical </a>
-                            <a class="dropdown-item" href="../layout-rtl.html"> RTL mode </a>
-                            <a class="dropdown-item" href="../layout-vertical.html"> Vertical </a>
-                            <a class="dropdown-item" href="../layout-vertical-transparent.html"> Vertical transparent </a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#navbar-plugins"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"
-                        role="button"
-                        aria-expanded="false"
-                      >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"
-                          ><!-- Download SVG icon from http://tabler.io/icons/icon/puzzle -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-1"
-                          >
-                            <path
-                              d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"
-                            /></svg
-                        ></span>
-                        <span class="nav-link-title"> Plugins </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="../charts.html"> Charts </a>
-                        <a class="dropdown-item" href="../colorpicker.html"> Color picker </a>
-                        <a class="dropdown-item" href="../datatables.html"> Datatables </a>
-                        <a class="dropdown-item" href="../dropzone.html"> Dropzone </a>
-                        <a class="dropdown-item" href="../fullcalendar.html"> Fullcalendar </a>
-                        <a class="dropdown-item" href="../inline-player.html"> Inline player </a>
-                        <a class="dropdown-item" href="../lightbox.html"> Lightbox </a>
-                        <a class="dropdown-item" href="../maps.html"> Map </a>
-                        <a class="dropdown-item" href="../map-fullsize.html"> Map fullsize </a>
-                        <a class="dropdown-item" href="../maps-vector.html"> Map vector </a>
-                        <a class="dropdown-item" href="../turbo-loader.html"> Turbo loader </a>
-                        <a class="dropdown-item" href="../wysiwyg.html"> WYSIWYG editor </a>
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#navbar-addons"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"
-                        role="button"
-                        aria-expanded="false"
-                      >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"
-                          ><!-- Download SVG icon from http://tabler.io/icons/icon/gift -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-1"
-                          >
-                            <path d="M3 8m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z" />
-                            <path d="M12 8l0 13" />
-                            <path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7" />
-                            <path d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5" /></svg
-                        ></span>
-                        <span class="nav-link-title"> Addons </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="../icons.html"> Icons </a>
-                        <a class="dropdown-item" href="../emails.html"> Emails </a>
-                        <a class="dropdown-item" href="../flags.html"> Flags </a>
-                        <a class="dropdown-item" href="../illustrations.html"> Illustrations </a>
-                        <a class="dropdown-item" href="../payment-providers.html"> Payment providers </a>
-                      </div>
-                    </li>
-
-
 
 
 
@@ -1284,76 +1080,60 @@
                     </li>
                     <!-- vung thay doi /001 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    
+                    <!-- vung thay doi 002 -->
 
                     <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="#navbar-help"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"
-                        role="button"
-                        aria-expanded="false"
-                      >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"
-                          ><!-- Download SVG icon from http://tabler.io/icons/icon/lifebuoy -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-1"
-                          >
-                            <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                            <path d="M15 15l3.35 3.35" />
-                            <path d="M9 15l-3.35 3.35" />
-                            <path d="M5.65 5.65l3.35 3.35" />
-                            <path d="M18.35 5.65l-3.35 3.35" /></svg
-                        ></span>
-                        <span class="nav-link-title"> Help </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="https://tabler.io/docs" target="_blank" rel="noopener"> Documentation </a>
-                        <a class="dropdown-item" href="../changelog.html"> Changelog </a>
-                        <a class="dropdown-item" href="https://github.com/tabler/tabler" target="_blank" rel="noopener"> Source code </a>
-                        <a class="dropdown-item text-pink" href="https://github.com/sponsors/codecalm" target="_blank" rel="noopener">
-                          <!-- Download SVG icon from http://tabler.io/icons/icon/heart -->
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="icon icon-inline me-1 icon-2"
-                          >
-                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                          </svg>
-                          Sponsor project!
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#navbar-addons"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                            role="button"
+                            aria-expanded="false"
+                        >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"
+                                ><!-- Download SVG icon from http://tabler.io/icons/icon/gift -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
+                            </span>
+                            <span class="nav-link-title"> Config&FAQ </span>
                         </a>
-                      </div>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../task2/config.html"> Config  </a>
+                            <a class="dropdown-item" href="../task2/FAQ.html"> FAQ </a>
+                        </div>
                     </li>
+                    <!-- vung thay doi /002 -->
+
+                    <!-- vung thay doi 003 -->
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#navbar-addons"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                            role="button"
+                            aria-expanded="false"
+                        >
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"
+                                ><!-- Download SVG icon from http://tabler.io/icons/icon/gift -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-article"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M7 8h10" /><path d="M7 12h10" /><path d="M7 16h10" /></svg>
+                            </span>
+                            <span class="nav-link-title"> News </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../admin/news/index.html">
+                                Quản lý bài viết
+                                <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                            </a>
+                            <a class="dropdown-item" href="../admin/comments/index.html">
+                                Quản lý bình luận
+                                <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                            </a>
+                        </div>
+                    </li>
+                    <!-- vung thay doi 003 -->
+
                   </ul>
                   <!-- END NAVBAR MENU -->
                 </div>
