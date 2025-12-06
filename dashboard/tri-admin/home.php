@@ -11,6 +11,9 @@ try {
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM users");
     $totalUsers = $stmt->fetch()['total'];
 
+    $stmt = $pdo->query("SELECT COUNT(*) as total FROM faq");
+    $totalFaq = $stmt->fetch()['total'];
+
     $stmt = $pdo->query("SELECT o.id, o.order_number, o.total_amount, o.status, o.created_at, u.full_name FROM orders o JOIN users u ON o.user_id = u.id ORDER BY o.created_at DESC LIMIT 10");
     $recentOrders = $stmt->fetchAll();
 
@@ -63,19 +66,19 @@ try {
     $stmt = $pdo->query("
         SELECT
             DATE(created_at) as date,
-            COUNT(*) as contacts_count
-        FROM contacts
+            COUNT(*) as faq_count
+        FROM faq
         WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
         GROUP BY DATE(created_at)
         ORDER BY date
     ");
-    $contactChartData = $stmt->fetchAll();
+    $faqChartData = $stmt->fetchAll();
 
     // Generate chart data arrays
     $chartDates = [];
     $userChartValues = [];
     $orderChartValues = [];
-    $contactChartValues = [];
+    $faqChartValues = [];
 
     // Create date range for last 30 days
     for ($i = 29; $i >= 0; $i--) {
@@ -102,15 +105,15 @@ try {
         }
         $orderChartValues[] = $orderCount;
 
-        // Contacts data
-        $contactCount = 0;
-        foreach ($contactChartData as $row) {
+        // FAQ data
+        $faqCount = 0;
+        foreach ($faqChartData as $row) {
             if ($row['date'] === $date) {
-                $contactCount = (int)$row['contacts_count'];
+                $faqCount = (int)$row['faq_count'];
                 break;
             }
         }
-        $contactChartValues[] = $contactCount;
+        $faqChartValues[] = $faqCount;
     }
 
     // User roles distribution (for donut chart)
@@ -334,8 +337,8 @@ try {
                                             </span>
                                         </div>
                                         <div class="col">
-                                            <div class="font-weight-medium">Liên hệ chưa đọc</div>
-                                            <div class="text-secondary">2 liên hệ</div>
+                                            <div class="font-weight-medium">FAQ chưa đọc</div>
+                                            <div class="text-secondary"><?php echo $totalFaq; ?> FAQ</div>
                                         </div>
                                     </div>
                                 </div>
@@ -508,20 +511,20 @@ try {
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div class="subheader">Liên Hệ</div>
+                                        <div class="subheader">FAQ</div>
                                         <div class="ms-auto lh-1">
                                             <div class="dropdown">
                                                 <a
                                                     class="dropdown-toggle text-secondary"
-                                                    id="contacts-dropdown"
+                                                    id="faq-dropdown"
                                                     href="#"
                                                     data-bs-toggle="dropdown"
                                                     aria-haspopup="true"
                                                     aria-expanded="false"
-                                                    aria-label="Select time range for contacts"
+                                                    aria-label="Select time range for faq"
                                                     >Last 7 days</a
                                                 >
-                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="contacts-dropdown">
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="faq-dropdown">
                                                     <a class="dropdown-item active" href="#" aria-current="true">Last 7 days</a>
                                                     <a class="dropdown-item" href="#">Last 30 days</a>
                                                     <a class="dropdown-item" href="#">Last 3 months</a>
@@ -530,7 +533,7 @@ try {
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-baseline">
-                                        <div class="h1 mb-3 me-2">2</div>
+                                        <div class="h1 mb-3 me-2"><?php echo $totalFaq; ?></div>
                                         <div class="me-auto">
                                             <span class="text-green d-inline-flex align-items-center lh-1">
                                                 7%
@@ -553,7 +556,7 @@ try {
                                             </span>
                                         </div>
                                     </div>
-                                    <div id="chart-contacts" class="position-relative chart-sm d-flex justify-content-center"></div>
+                                    <div id="chart-faq" class="position-relative chart-sm d-flex justify-content-center"></div>
                                 </div>
                             </div>
                         </div>
@@ -965,9 +968,9 @@ try {
                     },
                 }).render();
 
-            // Contacts chart (using revenue chart configuration)
+            // FAQ chart (using revenue chart configuration)
             window.ApexCharts &&
-                new ApexCharts(document.getElementById("chart-contacts"), {
+                new ApexCharts(document.getElementById("chart-faq"), {
                     chart: {
                         type: "area",
                         fontFamily: "inherit",
@@ -993,8 +996,8 @@ try {
                     },
                     series: [
                         {
-                            name: "Contacts",
-                            data: <?php echo json_encode($contactChartValues); ?>,
+                            name: "FAQ",
+                            data: <?php echo json_encode($faqChartValues); ?>,
                         },
                     ],
                     tooltip: {

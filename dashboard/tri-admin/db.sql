@@ -7,6 +7,35 @@
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
+
+-- 1. LÀM SẠCH DATABASE
+
+
+-- DROP TABLE IF EXISTS reviews;
+
+-- DROP TABLE IF EXISTS order_items;
+-- DROP TABLE IF EXISTS orders;
+
+-- DROP TABLE IF EXISTS products;
+-- DROP TABLE IF EXISTS categories;
+-- DROP TABLE IF EXISTS users;
+
+
+
+-- DROP TABLE IF EXISTS cart_items;
+-- DROP TABLE IF EXISTS carts;
+
+-- DROP TABLE IF EXISTS news_comments;
+
+-- DROP TABLE IF EXISTS news;
+
+
+-- DROP TABLE IF EXISTS `faq`;
+-- DROP TABLE IF EXISTS `settings`;
+
+
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -21,7 +50,113 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `techstore_db`
 --
 
+CREATE DATABASE techstore_db;
+
+USE techstore_db;
+
+
+
+
+
+
+
+CREATE TABLE `settings` (
+  `setting_key` varchar(50) NOT NULL,
+  `setting_value` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
+('address', '939 Kha Vạn Cân, Phường Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam'),
+('email', 'support@techshop.vn'),
+('footer_col1', '{\"call_buy\":\"1900 1009\",\"call_complain\":\"1800 1062\",\"call_warranty\":\"1900 232 464\"}'),
+('footer_col2', '[{\"text\":\"Giới thiệu công ty\",\"url\":\"\\/gioi-thieu\"},{\"text\":\"Tuyển dụng\",\"url\":\"\\/tuyen-dung\"}]'),
+('footer_socials', '{\"facebook\":\"https:\\/\\/www.youtube.com\\/watch?v=xvFZjo5PgG0\",\"youtube\":\"https:\\/\\/www.youtube.com\\/watch?v=xvFZjo5PgG0\",\"zalo\":\"Zalo OA\"}'),
+('google_map', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d571.3593343612715!2d106.76016961475348!3d10.860629186827136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175277068982597%3A0xaa699df27cfcdee4!2sThegioiic!5e0!3m2!1svi!2s!4v1764737040480!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>'),
+('hotline', '1900 1000'),
+('partner_logos', '[\"uploads\\/1764692096_692f10809b928_download.png\"]'),
+('site_banner', '[\"uploads\\/1764734647_692fb6b7331b5_download.jpg\",\"uploads\\/1764737627_692fc25bc3713_download.jpg\",\"uploads\\/1764737632_692fc26088b92_download.png\"]'),
+('site_logo', 'uploads/1764690284_692f096c2ee39_download.png'),
+('site_title', '2246'),
+('slogan', 'Chuyên cung cấp laptop, điện thoại, phụ kiện chất lượng cao.');
+
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`setting_key`);
+
 -- --------------------------------------------------------
+-- Bảng faq
+-- --------------------------------------------------------
+CREATE TABLE `faq` (
+  `id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `answer` text NOT NULL,
+  `status` tinyint(4) DEFAULT 1 COMMENT '1: Hiển thị, 0: Ẩn',
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `faq` (`id`, `question`, `answer`, `status`, `created_at`) VALUES
+(1, 'Shop có ship COD toàn quốc không?', 'Có, chúng tôi hỗ trợ ship COD toàn quốc cho mọi đơn hàng.', 1, '2025-12-02 16:55:50'),
+(2, 'Bảo hành sản phẩm bao lâu?', 'Tùy theo sản phẩm, thường là 12 tháng chính hãng.', 1, '2025-12-02 16:55:50'),
+(3, 'Có hỗ trợ trả góp không?', 'Có hỗ trợ trả góp 0% qua thẻ tín dụng.', 1, '2025-12-02 16:55:50'),
+(6, 'Admin đẹp trai', 'Admin đẹp trai', 0, '2025-12-03 10:37:03');
+
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `faq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+SET FOREIGN_KEY_CHECKS=1;
+
+-- Hoàn tất
+SELECT 'Cài đặt bảng settings và faq thành công trong database techstore_db!' AS message;
+
+-- --------------------------------------------------------
+
+
+-- anh hiếu
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `news` (`id`, `title`, `content`, `image`, `created_at`) VALUES
+(1, 'iPhone 15 128GB | Chính hãng VN/A', '<div class=\"pagebody-copy\" style=\"text-align: justify;\">iPhone 15 v&agrave; iPhone 15 Plus sẽ c&oacute; năm m&agrave;u mới tuyệt đẹp:</div>\n<ul style=\"text-align: justify;\">\n<li class=\"pagebody-copy\" style=\"text-align: justify;\">hồng</li>\n<li class=\"pagebody-copy\" style=\"text-align: justify;\">v&agrave;ng</li>\n<li class=\"pagebody-copy\" style=\"text-align: justify;\">xanh l&aacute;</li>\n<li class=\"pagebody-copy\" style=\"text-align: justify;\">xanh dương</li>\n<li class=\"pagebody-copy\" style=\"text-align: justify;\">đen</li>\n</ul>\n<div class=\"pagebody-copy\" style=\"text-align: justify;\">iPhone 15 v&agrave; iPhone 15 Plus thể hiện một bước nhảy vọt lớn với những cải tiến tuyệt vời về camera mang đến cảm hứng s&aacute;ng tạo, Dynamic Island trực quan c&ugrave;ng c&aacute;c t&iacute;nh năng như Roadside Assistance th&ocirc;ng qua vệ tinh tạo ra sự kh&aacute;c biệt lớn trong cuộc sống của người d&ugrave;ng,&rdquo; Kaiann Drance, Ph&oacute; Chủ tịch bộ phận Tiếp thị Sản phẩm iPhone To&agrave;n cầu của Apple chia sẻ:</div>\n<div class=\"pagebody-copy\" style=\"text-align: justify;\">&nbsp;</div>\n<div class=\"pagebody-copy\" style=\"text-align: justify;\"><em>&ldquo;Trong năm nay, ch&uacute;ng t&ocirc;i cũng đưa sức mạnh của c&ocirc;ng nghệ nhiếp ảnh điện to&aacute;n l&ecirc;n một tầm cao mới với camera Ch&iacute;nh 48MP c&oacute; chế độ mặc định 24MP mới cho ra những tấm ảnh với độ ph&acirc;n giải cực kỳ cao, một tuỳ chọn Telephoto 2x mới, v&agrave; những chế độ chụp ảnh ch&acirc;n dung thế hệ mới.\"</em></div>\n<div class=\"pagebody-copy\">\n<h4 class=\"pagebody-header\" style=\"text-align: justify;\"><span style=\"color: #2dc26b;\"><strong>Một Thiết Kế Đẹp v&agrave; Bền Bỉ với M&agrave;n H&igrave;nh Được N&acirc;ng Cấp</strong></span></h4>\n<div class=\"pagebody-copy\" style=\"text-align: justify;\">Sở hữu k&iacute;ch thước m&agrave;n h&igrave;nh 6.1-inch v&agrave; 6.7-inch,<sup>1</sup>&nbsp;iPhone 15 v&agrave; iPhone 15 Plus được trang bị Dynamic Island, một c&aacute;ch thức s&aacute;ng tạo nhằm tương t&aacute;c với c&aacute;c cảnh b&aacute;o quan trọng v&agrave; Hoạt Động Trực Tiếp. Trải nghiệm tinh tế sẽ mở rộng v&agrave; th&iacute;ch ứng một c&aacute;ch linh hoạt để người d&ugrave;ng c&oacute; thể xem hướng đi tiếp theo trong Bản Đồ, dễ d&agrave;ng điều khiển &acirc;m nhạc, v&agrave; khi t&iacute;ch hợp với ứng dụng của b&ecirc;n thứ ba, người d&ugrave;ng sẽ nhận được th&ocirc;ng tin cập nhật theo thời gian thực về hoạt động giao đồ ăn, chia sẻ chuyến đi, tỷ số thể thao, kế hoạch du lịch, v&agrave; hơn thế nữa. M&agrave;n h&igrave;nh Super Retina XDR rất l&yacute; tưởng để xem nội dung, v&agrave; chơi game. Giờ đ&acirc;y độ s&aacute;ng HDR cao nhất đ&atilde; đạt đến 1600 nit, nhờ đ&oacute; ảnh v&agrave; video HDR sẽ r&otilde; n&eacute;t hơn bao giờ hết. V&agrave; khi trời nhiều nắng, độ s&aacute;ng cao nhất<strong>&nbsp;</strong>ngo&agrave;i trời sẽ đạt đến 2000 nit &mdash; s&aacute;ng gấp đ&ocirc;i so với thế hệ trước.</div>\n</div>', '1764775127_693054d768781.jpg', '2025-12-04 10:31:30'),
+(2, 'MacBook Air M4 13 inch 2025 10CPU 8GPU 16GB 256GB | Chính hãng Apple Việt Nam', '<h4 style=\"text-align: justify;\">Chiếc MacBook tốt nhất d&agrave;nh cho hầu hết người d&ugrave;ng, nay lại c&agrave;ng trở n&ecirc;n ho&agrave;n hảo v&agrave; tốt hơn</h4>\r\n<p style=\"text-align: justify;\">MacBook Air 13-inch M3 vẫn giữ được hầu hết c&aacute;c t&iacute;nh năng tuyệt vời đ&atilde; l&agrave;m n&ecirc;n th&agrave;nh c&ocirc;ng của phi&ecirc;n bản trước. M&agrave;n h&igrave;nh sống động 13,6 inch, thiết kế mỏng nhẹ hiện đại v&agrave; bốn t&ugrave;y chọn m&agrave;u sắc. Kết hợp với chip M3 mạnh mẽ mang lại hiệu năng ấn tượng cho c&ocirc;ng việc, chơi game v&agrave; c&aacute;c t&aacute;c vụ AI, chiếc notebook n&agrave;y thực sự l&agrave; một lựa chọn ho&agrave;n hảo.</p>\r\n<p style=\"text-align: justify;\"><strong>Ưu điểm</strong></p>\r\n<ul style=\"text-align: justify;\">\r\n<li>Hiệu năng M3 mạnh mẽ</li>\r\n<li>M&agrave;n h&igrave;nh s&aacute;ng v&agrave; rực rỡ</li>\r\n<li>Thiết kế si&ecirc;u di động</li>\r\n<li>Thời lượng pin ấn tượng</li>\r\n<li>Hỗ trợ m&agrave;n h&igrave;nh k&eacute;p</li>\r\n</ul>\r\n<p style=\"text-align: justify;\"><strong>Nhược điểm</strong></p>\r\n<ul style=\"text-align: justify;\">\r\n<li>Hiệu năng cải thiện kh&ocirc;ng qu&aacute; nhiều so với M2</li>\r\n</ul>\r\n<p style=\"text-align: justify;\">Chiếc MacBook Air 13-inch M3 mới kh&ocirc;ng phải l&agrave; một cuộc c&aacute;ch mạng, nhưng n&oacute; mang lại nhiều n&acirc;ng cấp đ&aacute;ng gi&aacute; hơn so với phi&ecirc;n bản MacBook Air 13-inch M2. Điểm nổi bật ch&iacute;nh l&agrave; sự t&iacute;ch hợp chip Apple M3, đưa n&oacute; ngang tầm với d&ograve;ng MacBook Pro mới nhất. Bộ vi xử l&yacute; n&agrave;y kh&ocirc;ng chỉ mang lại hiệu năng CPU vượt trội m&agrave; c&ograve;n được n&acirc;ng cấp về đồ họa v&agrave; tr&iacute; tuệ nh&acirc;n tạo. Hơn nữa, thời lượng pin vốn đ&atilde; ấn tượng nay lại được cải thiện th&ecirc;m so với phi&ecirc;n bản trước.</p>\r\n<p style=\"text-align: justify;\">Giống như Air M2, chiếc notebook được cập nhật n&agrave;y vẫn sở hữu m&agrave;n h&igrave;nh Retina s&aacute;ng v&agrave; sống động 13,6 inch ho&agrave;n hảo để xem video, chơi game v&agrave; xử l&yacute; c&ocirc;ng việc. N&oacute; c&oacute; c&ugrave;ng thiết kế phẳng, thực dụng như những chiếc MacBook Pro gần đ&acirc;y nhất, c&ugrave;ng với b&agrave;n ph&iacute;m thoải m&aacute;i, touchpad nhạy b&eacute;n v&agrave; sạc MagSafe. Đ&uacute;ng với t&ecirc;n gọi &ldquo;Air&rdquo;, chiếc notebook chỉ nặng 2,7 pound n&agrave;y rất dễ d&agrave;ng mang theo bất cứ đ&acirc;u.</p>\r\n<p style=\"text-align: justify;\">Với gi&aacute; khởi điểm từ 1.099 USD, MacBook Air M3 13-inch kh&ocirc;ng hẳn l&agrave; rẻ, nhưng n&oacute; vẫn hợp t&uacute;i tiền hơn so với MacBook Pro 14-inch gi&aacute; 1.999 USD hay MacBook Pro 16-inch gi&aacute; 2.499 USD. Ngay cả khi MacBook Air M2 giờ c&oacute; gi&aacute; khởi điểm 999 USD, bạn vẫn c&oacute; được gi&aacute; trị tuyệt vời với những g&igrave; m&agrave; Air M3 mới mang lại. Hiện tại, đ&acirc;y l&agrave; chiếc MacBook sử dụng chip M3 c&oacute; gi&aacute; cả phải chăng nhất m&agrave; bạn c&oacute; thể mua.</p>\r\n<p style=\"text-align: justify;\">Với hiệu năng xuất sắc, thời lượng pin đ&aacute;ng kinh ngạc v&agrave; thiết kế si&ecirc;u di động, MacBook Air 13-inch M3 l&agrave; một trong những chiếc MacBook v&agrave; laptop tốt nhất hiện nay. H&atilde;y c&ugrave;ng nhau tham khảo qua b&agrave;i đ&aacute;nh gi&aacute; chi tiết b&ecirc;n dưới.</p>\r\n<h3>Đ&aacute;nh gi&aacute; MacBook Air 13 inch M3: Bảng t&oacute;m tắt</h3>\r\n<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"><colgroup><col style=\"width: 28.9978%;\"><col style=\"width: 71.0022%;\"></colgroup>\r\n<tbody>\r\n<tr>\r\n<td><strong>Thiết kế d&agrave;nh cho?</strong></td>\r\n<td>D&agrave;nh cho những người đang sở hữu MacBook M1 hoặc Intel đời cũ v&agrave; muốn c&oacute; một chiếc MacBook với bộ xử l&yacute; M3 mới nhất.</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Mức gi&aacute; l&agrave; bao nhi&ecirc;u?</strong></td>\r\n<td>MacBook Air M3 13-inch c&oacute; gi&aacute; khởi điểm từ 1.099 USD tr&ecirc;n trang web của Apple.</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Những điểm y&ecirc;u th&iacute;ch?</strong></td>\r\n<td>Thiết kế si&ecirc;u di động, bắt mắt, m&agrave;n h&igrave;nh sống động, c&oacute; nhiều sự lựa chọn về m&agrave;u sắc v&agrave; hiệu năng mạnh mẽ từ chip M3</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '1764775457_69305621edf6c.jpeg', '2025-12-04 10:31:30'),
+(3, 'Tỷ phú trẻ nhất thế giới \'không nghỉ ngày nào\' suốt ba năm', '<p class=\"description\" style=\"text-align: justify;\">Tỷ ph&uacute; Brendan Foody, CEO c&ocirc;ng ty AI Mercor, cho biết anh l&agrave;m việc li&ecirc;n tục nhưng kh&ocirc;ng thấy kiệt sức nhờ đam m&ecirc; v&agrave; nh&igrave;n ra gi&aacute; trị trong c&ocirc;ng việc,</p>\r\n<article class=\"fck_detail\">\r\n<p class=\"Normal\" style=\"text-align: justify;\">Foody cho biết, một trong những th&oacute;i quen gi&uacute;p anh trở th&agrave;nh tỷ ph&uacute; l&agrave; kh&ocirc;ng nghỉ ng&agrave;y n&agrave;o. \"T&ocirc;i l&agrave;m việc mỗi ng&agrave;y trong ba năm qua\", anh n&oacute;i với&nbsp;<em>Fortune</em>.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Anh cho rằng mọi người kiệt sức kh&ocirc;ng phải do qu&aacute; chăm chỉ, m&agrave; v&igrave; kh&ocirc;ng cảm thấy thỏa m&atilde;n, &yacute; nghĩa v&agrave; hiệu quả. Anh cũng từng nghĩ c&ocirc;ng việc l&agrave; điều m&igrave;nh phải l&agrave;m. \"Thường đ&oacute; l&agrave; việc t&ocirc;i kh&ocirc;ng th&iacute;ch\", anh chia sẻ. \"Nhưng khi bắt đầu ph&aacute;t triển Mercor, t&ocirc;i bị cuốn h&uacute;t v&agrave; kh&ocirc;ng thể ngừng nghĩ đến, cả khi ăn tối với cha mẹ hay l&agrave;m bất cứ điều g&igrave; kh&aacute;c, n&oacute; vẫn lởn vởn trong đầu\".</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Theo Foody, cần đảm bảo thấy được t&aacute;c động của những g&igrave; đ&atilde; l&agrave;m v&agrave; lợi &iacute;ch khi đầu tư nhiều thời gian. Anh n&oacute;i: \"T&ocirc;i kh&ocirc;ng thể thực sự nghỉ ng&agrave;y n&agrave;o v&igrave; bị th&ocirc;i th&uacute;c phải quay lại với c&ocirc;ng việc. V&igrave; vậy, t&ocirc;i nghĩ một trong những điều quan trọng nhất l&agrave; mọi người t&igrave;m thấy thứ họ thực sự đam m&ecirc; v&agrave; c&oacute; thể d&agrave;nh hết t&acirc;m huyết v&agrave;o đ&oacute;\".</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Sau khi rời Đại học Georgetown để dồn to&agrave;n lực cho Mercor, anh gần như kh&ocirc;ng c&ograve;n những buổi c&agrave; ph&ecirc; t&aacute;n gẫu hay những giờ ph&uacute;t thư gi&atilde;n xa xỉ. Anh kh&ocirc;ng th&iacute;ch họp nhiều v&agrave; một ng&agrave;y tốt đẹp đơn giản l&agrave; được viết t&agrave;i liệu hoặc ph&aacute;t triển &yacute; tưởng. Nhưng anh cho biết, ngay cả với lịch họp d&agrave;y đặc, t&igrave;nh y&ecirc;u d&agrave;nh cho c&ocirc;ng việc vẫn gi&uacute;p anh trụ vững.</p>\r\n</article>', '1764905640_693252a8ae6f8.webp', '2025-12-05 03:34:00'),
+(4, 'Phone 17 Pro bị cắt tính năng chụp đêm ở chế độ chân dung', '<p>iPhone 17 Pro v&agrave; 17 Pro Max kh&ocirc;ng thể k&iacute;ch hoạt chế độ chụp đ&ecirc;m khi đang ở chế độ ch&acirc;n dung, t&iacute;nh năng vốn c&oacute; mặt tr&ecirc;n d&ograve;ng Pro từ năm 2020.</p>\r\n<p class=\"Normal\">Một số người d&ugrave;ng iPhone 17 Pro v&agrave; 17 Pro Max b&agrave;y tỏ sự thất vọng tr&ecirc;n c&aacute;c diễn đ&agrave;n khi ph&aacute;t hiện m&aacute;y thiếu hỗ trợ quan trọng. Hai mẫu Pro mới nhất kh&ocirc;ng cho ph&eacute;p k&iacute;ch hoạt đồng thời chế độ chụp đ&ecirc;m (Night mode) khi đang chụp ảnh ở chế độ ch&acirc;n dung (Portrait mode), trong khi những thế hệ Pro trước đ&oacute; vẫn sử dụng được. T&iacute;nh năng n&agrave;y ra mắt năm 2020 tr&ecirc;n iPhone 12 Pro, cho ph&eacute;p tạo ra những bức ảnh x&oacute;a ph&ocirc;ng chất lượng cao, ngay cả trong điều kiện &aacute;nh s&aacute;ng yếu.</p>\r\n<p class=\"Normal\">Người d&ugrave;ng c&oacute; thể tự kiểm tra bằng c&aacute;ch mở ứng dụng Camera, chọn chế độ Ảnh, sau đ&oacute; che ống k&iacute;nh sau để m&ocirc; phỏng m&ocirc;i trường thiếu s&aacute;ng. Biểu tượng trăng khuyết của Night mode sẽ xuất hiện. Tuy nhi&ecirc;n, khi chuyển sang chế độ Portrait mode v&agrave; lặp lại thao t&aacute;c tr&ecirc;n, biểu tượng n&agrave;y c&ugrave;ng t&ugrave;y chọn Night mode trong bảng c&agrave;i đặt biến mất ho&agrave;n to&agrave;n.</p>\r\n<p class=\"Normal\">\"Ảnh ch&acirc;n dung ban đ&ecirc;m kh&ocirc;ng đẹp như mong đợi, đ&oacute; l&agrave; bước l&ugrave;i so với chất lượng c&aacute;c iPhone trước đ&acirc;y c&oacute; thể đạt được\", t&agrave;i khoản&nbsp;<em>catalyticclover&nbsp;</em>cho biết tr&ecirc;n Reddit.</p>\r\n<p class=\"Normal\">Động th&aacute;i của Apple khiến nhiều người thấy kh&oacute; hiểu v&igrave; phần cứng của d&ograve;ng Pro ho&agrave;n to&agrave;n c&oacute; khả năng xử l&yacute; tốt khi kết hợp hai chế độ. Theo&nbsp;<em>Macworld</em>, trong hướng dẫn sử dụng iOS 26, Apple x&aacute;c nhận cắt giảm t&iacute;nh năng. Trang c&ocirc;ng nghệ n&agrave;y dự đo&aacute;n nguy&ecirc;n nh&acirc;n c&oacute; thể li&ecirc;n quan đến th&ocirc;ng tin độ s&acirc;u trường ảnh. Ảnh Night mode tr&ecirc;n iPhone 17 Pro c&oacute; thể thiếu dữ liệu độ s&acirc;u cần thiết để tạo hiệu ứng x&oacute;a ph&ocirc;ng cho ch&acirc;n dung, khiến hai t&iacute;nh năng kh&ocirc;ng hoạt động c&ugrave;ng nhau.</p>\r\n<p class=\"Normal\">Một nguy&ecirc;n nh&acirc;n kh&aacute;c được cho l&agrave; giới hạn về độ ph&acirc;n giải ảnh. Ảnh ở chế độ Night mode thường giới hạn ở 12 megapixel, c&ograve;n ảnh ch&acirc;n dung tr&ecirc;n iPhone 17 Pro c&oacute; thể chụp ở độ ph&acirc;n giải 24 megapixel.</p>\r\n<p class=\"Normal\">Apple chưa đưa ra lời giải th&iacute;ch về quyết định tr&ecirc;n, hay c&oacute; kế hoạch bổ sung qua c&aacute;c bản cập nhật phần mềm trong tương lai hay kh&ocirc;ng.</p>', '1764905866_6932538a96bdd.webp', '2025-12-05 03:37:46'),
+(5, 'Video đội quân robot hình người Trung Quốc gây tranh cãi', '<p class=\"description\" style=\"text-align: justify;\">Video h&agrave;ng trăm robot h&igrave;nh người di chuyển đồng bộ, thể hiện tr&igrave;nh độ ph&aacute;t triển v&agrave; năng lực sản xuất ti&ecirc;n tiến, bị nghi ngờ về t&iacute;nh x&aacute;c thực.</p>\r\n<article class=\"fck_detail\">\r\n<p class=\"Normal\" style=\"text-align: justify;\">C&ocirc;ng ty robot Trung Quốc UBTech Robotics thu h&uacute;t sự ch&uacute; &yacute; to&agrave;n cầu khi c&ocirc;ng bố thước phim cho thấy robot h&igrave;nh người Walker S2 di chuyển theo đội h&igrave;nh lớn v&agrave;o th&aacute;ng 11. Trong video, đội qu&acirc;n robot h&igrave;nh người quay đầu, vẫy tay, đi bộ v&agrave; tự bước v&agrave;o c&aacute;c container, gợi nhắc đến bộ phim khoa học viễn tưởng&nbsp;<em>I, Robot</em>.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">UBTech Robotics tuy&ecirc;n bố đ&atilde; giao h&agrave;ng trăm robot h&igrave;nh người Walker S2 đến c&aacute;c cơ sở c&ocirc;ng nghiệp. C&ocirc;ng ty coi đ&acirc;y l&agrave; cột mốc quan trọng chứng minh robot h&igrave;nh người đang bước ra khỏi giai đoạn nguy&ecirc;n mẫu, chuyển sang triển khai thực tế.</p>\r\n</article>', '1764905931_693253cb973be.webp', '2025-12-05 03:38:51'),
+(6, 'Hoạt động trí tuệ nhân tạo sẽ hưởng ưu đãi và hỗ trợ cao nhất', '<p class=\"description\" style=\"text-align: justify;\">Ch&iacute;nh phủ cho biết dự Luật Tr&iacute; tuệ nh&acirc;n tạo sẽ đưa hoạt động ph&aacute;t triển AI v&agrave;o nh&oacute;m hưởng ưu đ&atilde;i cao nhất nhằm khuyến kh&iacute;ch đổi mới s&aacute;ng tạo v&agrave; ph&aacute;t triển thị trường.</p>\r\n<article class=\"fck_detail\">\r\n<p class=\"Normal\" style=\"text-align: justify;\">Chiều 4/12, Ủy ban Thường vụ Quốc hội cho &yacute; kiến dự &aacute;n Luật Tr&iacute; tuệ nh&acirc;n tạo. B&aacute;o c&aacute;o giải tr&igrave;nh n&ecirc;u dự thảo Luật được thiết kế theo hướng h&agrave;i h&ograve;a giữa kiểm so&aacute;t rủi ro v&agrave; th&uacute;c đẩy ph&aacute;t triển, tiếp thu kinh nghiệm từ EU v&agrave; H&agrave;n Quốc. Ch&iacute;nh phủ đặt mục ti&ecirc;u bảo đảm an to&agrave;n ở mức cao đối với c&aacute;c hệ thống rủi ro trọng yếu nhưng vẫn tạo kh&ocirc;ng gian đủ rộng để th&uacute;c đẩy đổi mới s&aacute;ng tạo, kh&ocirc;ng k&igrave;m h&atilde;m sự ph&aacute;t triển của c&ocirc;ng nghệ mới.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Cơ quan soạn thảo cho biết đ&atilde; chỉnh l&yacute; dự thảo để bảo đảm sự c&acirc;n bằng thực chất giữa quản l&yacute; v&agrave; th&uacute;c đẩy. Luật khẳng định hoạt động về tr&iacute; tuệ nh&acirc;n tạo sẽ được hưởng mức ưu đ&atilde;i v&agrave; hỗ trợ cao nhất, qua đ&oacute; th&uacute;c đẩy h&igrave;nh th&agrave;nh thị trường AI, mở rộng hệ sinh th&aacute;i c&ocirc;ng nghệ v&agrave; thu h&uacute;t nguồn lực v&agrave;o những lĩnh vực chiến lược.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Dự luật được ho&agrave;n thiện theo hướng thuận lợi hơn cho doanh nghiệp trong cơ chế thử nghiệm, gồm cho ph&eacute;p miễn, giảm một số nghĩa vụ tu&acirc;n thủ trong phạm vi thử nghiệm; &aacute;p dụng quy tr&igrave;nh thẩm định v&agrave; phản hồi nhanh theo quy định của Ch&iacute;nh phủ. C&aacute;ch tiếp cận n&agrave;y nhằm gi&uacute;p doanh nghiệp nhanh ch&oacute;ng triển khai sản phẩm mới, thử nghiệm c&ocirc;ng nghệ m&agrave; vẫn bảo đảm an to&agrave;n.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Quỹ Ph&aacute;t triển tr&iacute; tuệ nh&acirc;n tạo Quốc gia được định hướng tập trung hỗ trợ x&acirc;y dựng hạ tầng chiến lược, đầu tư c&ocirc;ng nghệ l&otilde;i v&agrave; nền tảng điện to&aacute;n, với cơ chế t&agrave;i ch&iacute;nh đặc th&ugrave;. Đ&aacute;ng ch&uacute; &yacute;, dự thảo bổ sung cơ chế phiếu hỗ trợ để doanh nghiệp khởi nghiệp, doanh nghiệp nhỏ v&agrave; vừa c&oacute; thể tiếp cận thuận lợi hạ tầng t&iacute;nh to&aacute;n v&agrave; nền tảng huấn luyện, gi&uacute;p n&acirc;ng cao năng lực cạnh tranh quốc gia.</p>\r\n</article>', '1764906015_6932541f43eeb.webp', '2025-12-05 03:40:15'),
+(7, 'Đại học Bách khoa Hà Nội và Huawei bắt tay phát triển nhân tài AI, 5G', '<p class=\"description\" style=\"text-align: justify;\">Đại học B&aacute;ch khoa H&agrave; Nội v&agrave; Huawei k&yacute; ghi nhớ hợp t&aacute;c th&uacute;c đẩy ph&aacute;t triển nh&acirc;n t&agrave;i c&ocirc;ng nghệ, mục ti&ecirc;u đ&agrave;o tạo 300 người mỗi năm.</p>\r\n<article class=\"fck_detail\">\r\n<p class=\"Normal\" style=\"text-align: justify;\">Được k&yacute; kết ng&agrave;y 4/12, bản ghi nhớ hợp t&aacute;c (MOU) tập trung đ&agrave;o tạo nh&acirc;n t&agrave;i cho c&aacute;c lĩnh vực AI, 5G, điện to&aacute;n đ&aacute;m m&acirc;y (cloud) hay năng lượng xanh (green energy), với mục ti&ecirc;u th&uacute;c đẩy chuyển đổi số trong ng&agrave;nh gi&aacute;o dục, ph&aacute;t triển nh&acirc;n t&agrave;i c&ocirc;ng nghệ, tăng cường li&ecirc;n kết giữa đại học v&agrave; doanh nghiệp.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">&nbsp;</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">Theo bi&ecirc;n bản thỏa thuận, hai b&ecirc;n sẽ hợp t&aacute;c tr&ecirc;n ba lĩnh vực ch&iacute;nh, gồm chuyển đổi số trong gi&aacute;o dục đại học, với trọng t&acirc;m x&acirc;y dựng m&ocirc; h&igrave;nh đại học số v&agrave; ứng dụng AI v&agrave;o giảng dạy - nghi&ecirc;n cứu - quản trị; ph&aacute;t triển nguồn nh&acirc;n lực ICT, triển khai chương tr&igrave;nh Huawei ICT Academy với mục ti&ecirc;u đ&agrave;o tạo 300 sinh vi&ecirc;n mỗi năm, n&acirc;ng cao năng lực giảng vi&ecirc;n th&ocirc;ng qua chương tr&igrave;nh đ&agrave;o tạo v&agrave; cung cấp học liệu miễn ph&iacute;; kết nối đại học - doanh nghiệp, gồm tổ chức Office Tour, Job Fair, hội thảo kỹ thuật v&agrave; c&aacute;c chương tr&igrave;nh thực tập - tuyển dụng d&agrave;nh cho sinh vi&ecirc;n năm cuối nhằm tăng cường trải nghiệm thực tế v&agrave; n&acirc;ng cao năng lực nghề nghiệp.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">PGS.TS Nguyễn Phong Điền, Ph&oacute; gi&aacute;m đốc Đại học B&aacute;ch khoa H&agrave; Nội, đ&aacute;nh gi&aacute; lễ k&yacute; kết đ&aacute;nh dấu cột mốc quan trọng gi&uacute;p th&uacute;c đẩy c&ocirc;ng nghệ, gi&aacute;o dục v&agrave; ph&aacute;t triển bền vững tại Việt Nam. Việc n&agrave;y cũng gi&uacute;p sinh vi&ecirc;n tiếp cận chương tr&igrave;nh đ&agrave;o tạo ti&ecirc;n tiến, lấy chứng chỉ nghề nghiệp quốc tế v&agrave; cơ hội tham gia c&aacute;c chương tr&igrave;nh to&agrave;n cầu. Đ&acirc;y cũng l&agrave; cơ hội để sinh vi&ecirc;n thực tập, tiếp x&uacute;c hội chợ việc l&agrave;m, hội thảo kỹ thuật v&agrave; hoạt động kết nối với chuy&ecirc;n gia h&agrave;ng đầu trong ng&agrave;nh.</p>\r\n<div id=\"sis_outstream_container\" style=\"text-align: justify;\" data-set=\"dfp\"></div>\r\n<p class=\"Normal\" style=\"text-align: justify;\">&Ocirc;ng Ivan Liu, Tổng gi&aacute;m đốc Huawei Việt Nam, cho biết c&ocirc;ng ty sẽ cung cấp nguồn lực học thuật ti&ecirc;n tiến của Huawei ICT Academy, gi&uacute;p sinh vi&ecirc;n v&agrave; giảng vi&ecirc;n tiếp cận kiến thức mới về AI, điện to&aacute;n đ&aacute;m m&acirc;y, viễn th&ocirc;ng v&agrave; c&ocirc;ng nghệ th&ocirc;ng tin, đồng thời mở rộng cơ hội thực tập v&agrave; ph&aacute;t triển nghề nghiệp cho sinh vi&ecirc;n.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\">B&agrave; Purvis Cui, Gi&aacute;m đốc nh&acirc;n sự Huawei Việt Nam, cũng khẳng định sẽ tạo mọi điều kiện để sinh vi&ecirc;n Việt Nam c&oacute; cơ hội tham gia v&agrave;o c&aacute;c dự &aacute;n thực tế. Ngo&agrave;i Đại học B&aacute;ch khoa H&agrave; Nội, Huawei sẽ phối hợp với c&aacute;c trường trong cả nước để tổ chức c&aacute;c cuộc hội thảo để cập nhật về xu hướng c&ocirc;ng nghệ, xu hướng tuyển dụng nhằm gi&uacute;p sinh vi&ecirc;n c&oacute; sự chuẩn bị tốt hơn để tăng khả năng cạnh tranh khi tham gia v&agrave;o thị trường lao động.</p>\r\n<p class=\"Normal\" style=\"text-align: justify;\"><em>Huawei hiện l&agrave; đối t&aacute;c gi&aacute;o dục l&acirc;u năm của nhiều trường đại học Việt Nam. Th&ocirc;ng qua chương tr&igrave;nh Huawei ICT Academy, Huawei ICT Competition, Seeds for the Future cũng như c&aacute;c chương tr&igrave;nh thực tập, c&ocirc;ng ty hiện tuyển dụng t&agrave;i năng trẻ, g&oacute;p phần hỗ trợ qu&aacute; tr&igrave;nh chuyển đổi số quốc gia v&agrave; ph&aacute;t triển nguồn nh&acirc;n lực số chất lượng.</em></p>\r\n</article>', '1764910478_6932658ed6d55.webp', '2025-12-05 04:54:38'),
+(8, 'Top 30 Thảo luận về vai trò của công nghệ đối với đời sống con người', '<p style=\"text-align: justify;\">Con người đang từng ng&agrave;y thay đổi c&ocirc;ng nghệ, nhưng c&ocirc;ng nghệ cũng đang thay đổi cuộc sống của con người, tuy nhi&ecirc;n kh&ocirc;ng phải v&igrave; thế m&agrave; con người ng&agrave;y c&agrave;ng lệ thuộc v&agrave;o n&oacute;. Sự thay đổi n&agrave;y bao gồm cả những mặt t&iacute;ch cực v&agrave; ti&ecirc;u cực. oke</p>', '1764927918_6932a9aeb7bcf.jpg', '2025-12-05 09:45:18');
+
+CREATE TABLE `news_comments` (
+  `id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `status` tinyint(4) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `news_comments` (`id`, `news_id`, `author`, `content`, `status`, `created_at`) VALUES
+(7, 1, 'Vũ Minh Tuấn', 'Cảm ơn tác giả đã chia sẻ', 0, '2025-12-04 10:31:30'),
+(14, 2, 'Phạm Thị Lan', 'Rất chi tiết và rõ ràng', 1, '2025-12-04 10:31:30'),
+(15, 2, 'Hoàng Văn Hùng', 'Tôi đã học được nhiều điều mới', 1, '2025-12-04 10:31:30'),
+(17, 2, 'Đỗ Văn Tuấn', 'Cảm ơn tác giả đã chia sẻ', 1, '2025-12-04 10:31:30'),
+(18, 2, 'Lê Thị Trang', 'Nội dung khá tốt', 1, '2025-12-04 10:31:30'),
+(28, 7, 'nguyen duc hieu', 'good', 1, '2025-12-05 11:45:32'),
+(29, 7, 'nguyen duc hieu', 'xin chào', 1, '2025-12-05 11:45:53'),
+(30, 7, 'nguyen duc hieu', 'happy', 1, '2025-12-05 11:45:59'),
+(31, 7, 'nguyen duc hieu', 'hello', 1, '2025-12-05 11:46:02'),
+(32, 7, 'nguyen duc hieu', 'test', 1, '2025-12-05 11:46:07'),
+(33, 7, 'nguyen duc hieu', 'debug', 1, '2025-12-05 11:46:11'),
+(34, 7, 'nguyen duc hieu', 'test pagination', 1, '2025-12-05 11:46:32');
+
 
 --
 -- Cấu trúc bảng cho bảng `categories`
@@ -51,35 +186,6 @@ INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 -- Cấu trúc bảng cho bảng `news`
 --
 
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `link` varchar(255) DEFAULT '#',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `news`
---
-
-INSERT INTO `news` (`id`, `title`, `image`, `link`, `created_at`) VALUES
-(1, 'HONOR Magic Ultra 8: Viên đạn vượt trội với chip Snapdragon', 'pic/news1.jpg', 'https://example.com/news/honor-magic-ultra-8', '2025-11-28 22:17:49'),
-(2, 'Xiaomi 17 Ultra: Photography Kit với render sống động', 'pic/news2.jpg', 'https://example.com/news/xiaomi-17-ultra', '2025-11-28 22:17:49'),
-(3, 'Đánh giá Lenovo ThinkPad T14 Gen 6: Intel Core Ultra 7 258V', 'pic/news3.jpg', 'https://example.com/news/lenovo-thinkpad-t14', '2025-11-28 22:17:49'),
-(4, 'Asus Vivobook 16 Flip: Laptop 2 trong 1 OLED giá hợp lý', 'pic/news4.jpg', 'https://example.com/news/asus-vivobook-16-flip', '2025-11-28 22:17:49'),
-(5, 'So sánh Dimensity 9500 vs Snapdragon 8 Elite: Trận chiến chip flagship', 'pic/news5.jpg', 'https://example.com/news/dimensity-vs-snapdragon', '2025-11-28 22:17:49'),
-(6, 'Apple iPhone 17: Tin đồn về camera mới và thiết kế mỏng hơn', 'pic/news6.jpg', 'https://example.com/news/iphone-17-rumors', '2025-11-28 22:17:49'),
-(7, 'Samsung Galaxy S26: Dự đoán về pin lớn và AI nâng cao', 'pic/news7.jpg', 'https://example.com/news/galaxy-s26', '2025-11-28 22:17:49'),
-(8, 'Xiaomi Redmi Note 14: Giá rẻ nhưng hiệu năng mạnh mẽ', 'pic/news8.jpg', 'https://example.com/news/redmi-note-14', '2025-11-28 22:17:49'),
-(9, 'Asus ROG Phone 9: Gaming phone với tản nhiệt tiên tiến', 'pic/news9.jpg', 'https://example.com/news/rog-phone-9', '2025-11-28 22:17:49'),
-(10, 'Lenovo Yoga Slim 7x: Laptop mỏng nhẹ với Snapdragon X Elite', 'pic/news10.jpg', 'https://example.com/news/yoga-slim-7x', '2025-11-28 22:17:49'),
-(11, 'Honor MagicBook Art 14: Thiết kế nghệ thuật, hiệu suất cao', 'pic/news11.jpg', 'https://example.com/news/magicbook-art-14', '2025-11-28 22:17:49'),
-(12, 'POCO X7 Pro: Chip Dimensity 9200, sạc 90W', 'pic/news12.jpg', 'https://example.com/news/poco-x7-pro', '2025-11-28 22:17:49'),
-(13, 'Apple Watch Series 11: Theo dõi sức khỏe nâng cao', 'pic/news13.jpg', 'https://example.com/news/apple-watch-11', '2025-11-28 22:17:49'),
-(14, 'Samsung Galaxy Tab S10: Màn hình OLED 120Hz', 'pic/news14.jpg', 'https://example.com/news/galaxy-tab-s10', '2025-11-28 22:17:49'),
-(15, 'Xiaomi Mix Flip: Điện thoại gập gọn gàng', 'pic/news15.jpg', 'https://example.com/news/xiaomi-mix-flip', '2025-11-28 22:17:49'),
-(16, 'Asus Zenfone 12: Camera gimbal ổn định', 'pic/news16.jpg', 'https://example.com/news/zenfone-12', '2025-11-28 22:17:49');
 
 -- --------------------------------------------------------
 
@@ -92,7 +198,7 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `order_number` varchar(50) NOT NULL,
   `total_amount` decimal(15,2) NOT NULL,
-  `status` enum('pending','completed','cancelled') DEFAULT 'completed',
+  `status` enum('pending','shipping','completed','cancelled') DEFAULT 'completed',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -105,7 +211,7 @@ INSERT INTO `orders` (`id`, `user_id`, `order_number`, `total_amount`, `status`,
 (2, 3, 'ORD1764370663539', 28990000.00, 'completed', '2025-11-28 22:57:43'),
 (3, 3, 'ORD1764370999907', 26990000.00, 'completed', '2025-11-28 23:03:19'),
 (4, 3, 'ORD1764511520923', 28990000.00, 'completed', '2025-11-30 14:05:20'),
-(5, 3, 'ORD1764511684752', 53980000.00, 'completed', '2025-11-30 14:08:04');
+(5, 3, 'ORD1764511684752', 53980000.00, 'shipping', '2025-11-30 14:08:04');
 
 -- --------------------------------------------------------
 
@@ -134,6 +240,44 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `pric
 (4, 3, 3, 'Xiaomi 14 Ultra 5G', 26990000.00, 1, 'pic/product/2030.webp'),
 (5, 4, 2, 'Samsung Galaxy S24 Ultra', 28990000.00, 1, 'pic/product/2020.webp'),
 (6, 5, 3, 'Xiaomi 14 Ultra 5G', 26990000.00, 2, 'pic/product/2030.webp');
+-- --------------------------------------------------------
+-- 
+-- Bảng quản lý giỏ hàng (carts) và chi tiết các mặt hàng (cart_items)
+-- Hỗ trợ cả guest (session_id) và user đã đăng nhập (user_id)
+-- 
+
+CREATE TABLE `carts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `session_id` varchar(128) DEFAULT NULL,
+  `status` varchar(32) NOT NULL DEFAULT 'pending',
+  `total_amount` decimal(15,2) DEFAULT 0.00,
+  `shipping_name` varchar(255) DEFAULT NULL,
+  `shipping_phone` varchar(50) DEFAULT NULL,
+  `shipping_address` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `cart_items` (
+  `id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `price` decimal(15,2) DEFAULT 0.00,
+  `quantity` int(11) DEFAULT 1,
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Set primary keys and auto-increment for carts and cart_items
+ALTER TABLE `carts` ADD PRIMARY KEY (`id`);
+ALTER TABLE `carts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `cart_items` ADD PRIMARY KEY (`id`);
+ALTER TABLE `cart_items` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+-- Optional foreign key (commented out by default, enable if needed and if referential integrity desired):
+-- ALTER TABLE `cart_items` ADD CONSTRAINT `fk_cart_items_cart` FOREIGN KEY (`cart_id`) REFERENCES `carts`(`id`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 
@@ -1192,52 +1336,6 @@ INSERT INTO `reviews` (`id`, `product_id`, `user_name`, `rating`, `comment`, `cr
 (916, 84, 'Phan Quốc H', 1, 'Pin lâu, chụp nhiều ảnh.', '2025-11-28 22:17:49'),
 (917, 84, 'Nguyễn Thanh N', 1, 'Nhẹ, dễ mang theo.', '2025-11-28 22:17:49'),
 (918, 2, 'a', 5, 'a', '2025-11-28 22:55:17');
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `contacts`
---
-
-CREATE TABLE `contacts` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `message` text NOT NULL,
-  `status` enum('unread','read','replied') DEFAULT 'unread',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `contacts`
---
-
-INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `message`, `status`, `created_at`) VALUES
-(1, 'Nguyễn Văn A', 'nguyenvana@example.com', '0123456789', 'Tôi muốn hỏi về sản phẩm iPhone.', 'unread', '2025-11-28 22:17:49'),
-(2, 'Trần Thị B', 'tranthib@example.com', '0987654321', 'Khi nào có khuyến mãi?', 'read', '2025-11-28 22:17:49');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `settings`
---
-
-CREATE TABLE `settings` (
-  `id` int(11) NOT NULL,
-  `key` varchar(100) NOT NULL,
-  `value` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `settings`
---
-
-INSERT INTO `settings` (`id`, `key`, `value`) VALUES
-(1, 'company_intro', 'Chào mừng đến với TechStore - nơi cung cấp các sản phẩm công nghệ hàng đầu.'),
-(2, 'company_phone', '0123-456-789'),
-(3, 'company_address', '123 Đường ABC, Quận XYZ, TP.HCM'),
-(4, 'company_logo', 'pic/logo.png'),
-(5, 'company_image', 'pic/banner.jpg');
 
 -- --------------------------------------------------------
 
@@ -1312,19 +1410,6 @@ ALTER TABLE `reviews`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Chỉ mục cho bảng `contacts`
---
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key` (`key`);
-
---
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -1370,18 +1455,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=919;
-
---
--- AUTO_INCREMENT cho bảng `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT cho bảng `settings`
---
-ALTER TABLE `settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
