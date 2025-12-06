@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include './config.php';
 
 try {
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM products");
@@ -151,22 +151,22 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dashboard - TechStore Admin</title>
-    <link href="../dist/libs/jsvectormap/dist/jsvectormap.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-flags.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-socials.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-payments.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-vendors.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-marketing.css?1760059270" rel="stylesheet" />
-    <link href="../dist/css/tabler-themes.css?1760059270" rel="stylesheet" />
-    <link href="../dist/libs/apexcharts/dist/apexcharts.css?1760059270" rel="stylesheet" />
-    <link href="../preview/css/demo.css?1760059270" rel="stylesheet" />
+    <link href="./dist/libs/jsvectormap/dist/jsvectormap.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-flags.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-socials.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-payments.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-vendors.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-marketing.css?1760059270" rel="stylesheet" />
+    <link href="./dist/css/tabler-themes.css?1760059270" rel="stylesheet" />
+    <link href="./dist/libs/apexcharts/dist/apexcharts.css?1760059270" rel="stylesheet" />
+    <link href="./preview/css/demo.css?1760059270" rel="stylesheet" />
     <style>
         @import url("https://rsms.me/inter/inter.css");
     </style>
 </head>
 <body>
-    <script src="../dist/js/tabler-theme.min.js?1760059270"></script>
+    <script src="./dist/js/tabler-theme.min.js?1760059270"></script>
     <div class="page">
         <!-- BEGIN NAVBAR  -->
         <header class="navbar navbar-expand-md d-print-none">
@@ -272,7 +272,7 @@ try {
                                 <!-- BEGIN NAVBAR MENU -->
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="./tri-admin/home.php">
+                                        <a class="nav-link" href="./home.php">
                                             <span class="nav-link-icon d-md-none d-lg-inline-block"
                                                 ><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                                                 <svg
@@ -420,8 +420,8 @@ try {
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-deck row-cards mb-4">
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row p-0">
+                            <div class="col-12" style="padding-left: 16px; padding-right: 0;">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -924,9 +924,9 @@ try {
         </div>
     </div>
 
-    <script src="../dist/js/tabler.min.js?1760059270"></script>
-    <script src="../dist/libs/list.js/dist/list.min.js?1760059269" defer></script>
-    <script src="../dist/libs/apexcharts/dist/apexcharts.min.js?1760059270"></script>
+    <script src="./dist/js/tabler.min.js?1760059270"></script>
+    <script src="./dist/libs/list.js/dist/list.min.js?1760059269" defer></script>
+    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1760059270"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // User Growth chart

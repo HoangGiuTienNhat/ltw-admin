@@ -2,7 +2,6 @@
 $host = 'localhost';
 $dbname = 'techstore_db';
 $username = 'root';
-$password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
