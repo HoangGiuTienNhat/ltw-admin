@@ -33,30 +33,18 @@
       pending.forEach(c=>{ const itemsCount = (c.items||[]).length; const user = c.user_name || (c.user_id?c.user_id:'-');
         html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${c.created_at}</td><td class="text-end">`+
           `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
-          `<button class="btn btn-sm btn-primary ms-1" onclick="updateCartStatus(${c.id})">Set Status</button> `+
-          `<button class="btn btn-sm btn-danger ms-1" onclick="deleteCart(${c.id})">Delete</button>`+
+          `<button class="btn btn-sm btn-primary ms-1" onclick="completeProcessingCart(${c.id})">Complete to Order</button> `+
+          `<button class="btn btn-sm btn-danger ms-1" onclick="cancelCartAction(${c.id},'pending')">Cancel Cart</button>`+
           `</td></tr>`; });
       html += '</tbody></table></div>';
     }
 
-    // Processing section
-    html += '<h5>Processing (Awaiting Payment)</h5>';
-    if(!processing || processing.length===0){ html += '<div class="p-2 mb-3">No processing carts.</div>'; }
-    else {
-      html += '<div class="table-responsive"><table class="table card-table table-vcenter text-nowrap"><thead><tr><th>ID</th><th>User</th><th>Session</th><th>Items</th><th>Total</th><th>Updated</th><th>Action</th></tr></thead><tbody>';
-      processing.forEach(c=>{ const itemsCount = (c.items||[]).length; const user = c.user_name || (c.user_id?c.user_id:'-');
-        html += `<tr data-cart-id="${c.id}"><td>${c.id}</td><td>${escapeHtml(user)}</td><td>${escapeHtml(c.session_id||'')}</td><td>${itemsCount}</td><td>${c.total_amount}</td><td>${c.updated_at||c.created_at}</td><td class="text-end">`+
-          `<button class="btn btn-sm btn-outline-secondary" onclick="viewCart(${c.id})">View</button> `+
-          `<button class="btn btn-sm btn-success ms-1" onclick="completeProcessingCart(${c.id})">Complete Payment</button> `+
-          `<button class="btn btn-sm btn-warning ms-1" onclick="cancelProcessingCart(${c.id})">Cancel</button>`+
-          `</td></tr>`; });
-      html += '</tbody></table></div>';
-    }
+    
 
     container.innerHTML = html;
   }
 
-  // admin action: complete processing cart -> create order and mark cart completed
+  // admin action: complete cart -> create order and mark cart completed
   window.completeProcessingCart = async function(id){
     if(!confirm('Complete payment for cart '+id+'? This will create an order.')) return;
     try{
@@ -68,7 +56,17 @@
     } catch(err){ console.error(err); alert('Complete failed'); }
   };
 
-  window.cancelProcessingCart = async function(id){ if(!confirm('Cancel cart '+id+'?')) return; try{ const res = await fetch(apiCarts, { method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:id, status:'cancelled'}) }); const jr = await res.json(); if (jr && jr.success){ alert('Cancelled'); loadCarts(el('cartSearch')?el('cartSearch').value:''); } else alert('Cancel failed'); } catch(err){ console.error(err); alert('Cancel failed'); } };
+  // admin action: cancel cart -> restore inventory and delete cart items
+  window.cancelCartAction = async function(id, status){ 
+    const msg = status==='processing' ? 'Hủy giỏ hàng đang chờ thanh toán?' : 'Hủy giỏ hàng này?';
+    if(!confirm(msg)) return;
+    try{
+      const res = await fetch(apiCarts, { method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:id, status:'cancelled'}) });
+      const jr = await res.json();
+      if (jr && jr.success){ alert('Giỏ hàng đã bị hủy và sản phẩm đã được hoàn trả kho'); loadCarts(el('cartSearch')?el('cartSearch').value:''); }
+      else alert('Hủy thất bại');
+    } catch(err){ console.error(err); alert('Hủy thất bại'); }
+  };
 
   window.viewCart = async function(id){
     try{

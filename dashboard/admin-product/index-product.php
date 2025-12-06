@@ -1448,7 +1448,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                           <label class="form-label">Amount</label>
-                          <input type="number" class="form-control" id="amount" name="amount" value="100">
+                          <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                       </div>
                       <div class="mb-3">
