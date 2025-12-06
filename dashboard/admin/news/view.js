@@ -20,10 +20,12 @@ function renderPagination(pagination) {
     const container = document.getElementById('pagination');
     if (pagination.total_pages >= 1) {
         let html = `<ul class="pagination">`;
-        
         for (let i = 1; i <= pagination.total_pages; i++) {
-            const active = i === pagination.current_page ? 'active' : '';
-            html += `<li class="page-item ${active}"><a class="page-link" href="#" onclick="loadComments(${newsId}, ${i})">${i}</a></li>`;
+            if (i == pagination.current_page) {
+                html += `<li class="page-item active"><a class="page-link" href="#" onclick="loadComments(${newsId}, ${i})">${i}</a></li>`;
+            } else {
+                html += `<li class="page-item"><a class="page-link" href="#" onclick="loadComments(${newsId}, ${i})">${i}</a></li>`;
+            }
         }
         
         html += `</ul>`;

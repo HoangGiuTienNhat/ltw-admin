@@ -30,10 +30,10 @@ async function loadComments(page = 1) {
         let actionBtn = item.status == 1
             ? `<button class="btn btn-sm btn-secondary m-1" onclick="toggleStatus(${item.id}, 0)">Ẩn đi</button>`
             : `<button class="btn btn-sm btn-success m-1" onclick="toggleStatus(${item.id}, 1)">Duyệt</button>`;
-
+        news_title = item.news_title.length > 45 ? item.news_title.substring(0, 45) + '...' : item.news_title;
         const row = `
             <tr>
-                <td class="text-wrap" style="max-width: 150px;">
+                <td class="text-wrap">
                     ${new Date(item.created_at).toLocaleString('vi-VN', {
                         day: '2-digit',
                         month: '2-digit',
@@ -44,21 +44,23 @@ async function loadComments(page = 1) {
                         hour12: false
                     })}
                 </td>
-                <td class="text-wrap">
-                    <strong>${item.author}</strong>
+                <td class="text-wrap fw-semibold">
+                    ${item.author}
                 </td>
                 <td class="text-wrap text-muted">
                     ${item.content}
                 </td>
                 <td class="text-wrap">
-                    <a href="view.html?id=${item.news_id}" class="text-inherit comments-news-link">
-                        ${item.news_title}
+                    <a href="view.html?id=${item.news_id}" class="text-decoration-none">
+                        <p class="fw-semibold lh-sm m-0" style="word-wrap: break-word;">
+                            ${news_title}
+                        </p>
                     </a>
                 </td>
                 <td>
                     ${statusBadge}
                 </td>
-                <td style="white-space: nowrap; max-width: 120px;">
+                <td style="white-space: nowrap;">
                     ${actionBtn}
                     <button class="btn btn-sm btn-danger m-1" onclick="deleteComment(${item.id})">Xóa</button>
                 </td>
@@ -75,7 +77,7 @@ async function toggleStatus(id, newStatus) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('status', newStatus);
-
+    console.log(formData.get('id'), formData.get('status'));
     await fetch(`${API_URL}/toggle_status.php`, {
         method: 'POST',
         body: formData
@@ -88,11 +90,11 @@ async function toggleStatus(id, newStatus) {
 
 // Hàm xóa bình luận
 async function deleteComment(id) {
+    console.log("Deleting comment with ID:", id);
     if(!confirm("Bạn có chắc muốn xóa bình luận này?")) return;
 
     const formData = new FormData();
     formData.append('id', id);
-
     await fetch(`${API_URL}/delete.php`, {
         method: 'POST',
         body: formData

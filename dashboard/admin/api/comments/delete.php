@@ -1,5 +1,5 @@
 <?php
-require_once '../../config.php';
+include_once '../config/database.php';
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

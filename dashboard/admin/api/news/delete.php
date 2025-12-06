@@ -1,6 +1,8 @@
 <?php
 include_once '../config/database.php';
 header('Content-Type: application/json; charset=utf-8');
+$path_uploads = "../../../../../project-web/public/news_uploads/";
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "chỉ cho phép phương thức POST"]);
@@ -19,7 +21,7 @@ if ($id === false) {
     exit();
 }
 
-$path_uploads = "../../../../../project-web/public/news_uploads/";
+
 $sqlGet = "SELECT image FROM news WHERE id = ?";
 $stmtGet = $conn->prepare($sqlGet);
 $stmtGet->bind_param("i", $id);

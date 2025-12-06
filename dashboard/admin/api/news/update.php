@@ -1,6 +1,8 @@
 <?php
 include_once '../config/database.php';
 header('Content-Type: application/json; charset=utf-8');
+$path_uploads = "../../../../../project-web/public/news_uploads/";
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "chỉ cho phép phương thức POST"]);
@@ -24,10 +26,8 @@ if (empty($title) || empty($content)) {
     echo json_encode(["status" => "error", "message" => "Thiếu tiêu đề hoặc nội dung"]);
     exit();
 }
-$title = stripslashes($title);
-// $content = stripslashes($content);
+$title = strip_tags($title);
 $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-// $content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 
 $sqlGet = "SELECT image FROM news WHERE id = ?";
 $stmtGet = $conn->prepare($sqlGet);
@@ -42,7 +42,7 @@ if (!$oldNews) {
 }
 
 $imageName = $oldNews['image'];
-$path_uploads = "../../../../../project-web/public/news_uploads/";
+
 // Xử lý Upload ảnh mới (nếu có)
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
     $target_dir = $path_uploads;

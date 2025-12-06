@@ -38,12 +38,13 @@ async function loadNews(page = 1) {
 
     result.data.forEach(item => {
         const imgTag = item.image 
-            ? `<img src="${UPLOAD_URL}${item.image}" class="img-fluid object-fit-contain" alt="ảnh bìa bài viết">` 
+            ? `<img src="${UPLOAD_URL}${item.image}" class="img-fluid object-fit-contain" alt="ảnh bìa bài viết" loading="lazy">` 
             : `<span class="avatar">NA</span>`;
-            
+
+        title = item.title.length > 70 ? item.title.substring(0, 70) + '...' : item.title;
         const row = `
             <tr>
-                <td class="text-wrap" style="max-width: 150px;">
+                <td class="text-wrap">
                     ${new Date(item.created_at).toLocaleString('vi-VN', {
                         day: '2-digit',
                         month: '2-digit',
@@ -55,14 +56,16 @@ async function loadNews(page = 1) {
                     })}
                 </td>
                 <td class="text-wrap">
-                    <a href="view.html?id=${item.id}" class="text-inherit news-link">
-                        ${item.title}
+                    <a href="view.html?id=${item.id}" class="text-decoration-none">
+                        <p class="fw-semibold lh-sm" style="word-wrap: break-word; font-size: calc(0.75rem + 0.2vw);">
+                            ${title}
+                        </p>
                     </a>
                 </td>
-                <td style="max-width: 150px;">
+                <td>
                     ${imgTag}
                 </td>
-                <td style="white-space: nowrap; max-width: 120px;">
+                <td style="white-space: nowrap;">
                     <button class="btn btn-primary btn-sm m-1" onclick="editNews(${item.id})">Sửa</button>
                     <button class="btn btn-danger btn-sm m-1" onclick="deleteNews(${item.id})">Xóa</button>
                 </td>

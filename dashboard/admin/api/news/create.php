@@ -17,10 +17,8 @@ if (empty($title) || empty($content)) {
     echo json_encode(["status" => "error", "message" => "Thiếu tiêu đề hoặc nội dung"]);
     exit();
 }
-$title = stripslashes($title);
-$content = stripslashes($content);
+$title = strip_tags($title);
 $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-$content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
     $target_dir = $path_uploads;
